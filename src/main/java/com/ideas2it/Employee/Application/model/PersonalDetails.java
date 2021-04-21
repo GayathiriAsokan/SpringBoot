@@ -8,6 +8,7 @@ package com.ideas2it.Employee.Application.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,9 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * PersonalDetails class is a model class
- * It is used to hold the user personal details such as  name,emailid,phonenumber
- * It  holds Address details 
+ * PersonalDetails class is a model class It is used to hold the user personal
+ * details such as name,emailid,phonenumber It holds Address details
+ * 
  * @version 1.0
  */
 
@@ -30,30 +31,30 @@ import javax.persistence.Table;
  * class="com.ideas2it.Employee.Application.model.Address"/>
  */
 @Entity
-@Table(name="personal_details")
+@Table(name = "personal_details")
 public class PersonalDetails {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="name")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "personal_id")
 	private int personalId;
-	
-	@Column(name="personal_id")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="email_id")
+
+	@Column(name = "email_id")
 	private String emailId;
-	
-	@Column(name="dateof_birth")
+
+	@Column(name = "dateof_birth")
 	private String dateOfBirth;
-	
-	@Column(name="phone_number")
+
+	@Column(name = "phone_number")
 	private String phoneNumber;
-	
-	
-	@OneToMany
-    @JoinColumn(name="address_id")
+
+	@OneToMany (mappedBy="personalDetails",
+			cascade= CascadeType.ALL )
 	private Set<Address> addressSet;
+
 
 	/**
 	 * Default Constructor which creates an empty object of PersonalDetails
@@ -72,13 +73,10 @@ public class PersonalDetails {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void setAddressSet(Set <Address> address) { 
-		addressSet = address; 
-	}
 
-	public Set<Address> getAddressSet() {
-		return addressSet;
-	}
+	public void setAddressSet(Set <Address> address) { addressSet = address; }
+
+	public Set<Address> getAddressSet() { return addressSet; }
 
 
 	public int getPersonalId() {
@@ -121,17 +119,17 @@ public class PersonalDetails {
 		this.name = name;
 	}
 
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
+	/*
+	 * public Employee getEmployee() { return employee; } public void
+	 * setEmployee(Employee employee) { this.employee = employee; }
+	 */
+
+	// this.employee = employee+
+	// getAddressSet().toString(); // }
 
 	@Override
 	public String toString() {
-		return " \n PersonalDetails : \n  PersonalId" + getPersonalId() + "\n Name :" + getName() + "\n Phonenumber : " + getPhoneNumber() + "\n EmailId : " + getEmailId() +
-				"\n Date of birth : " + getDateOfBirth() + " " + getAddressSet().toString();
+		return " \n PersonalDetails : \n  PersonalId" + getPersonalId() + "\n Name :" + getName() + "\n Phonenumber : "
+				+ getPhoneNumber() + "\n EmailId : " + getEmailId() + "\n Date of birth : " + getDateOfBirth();
 	}
 }

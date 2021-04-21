@@ -32,7 +32,7 @@ import javax.persistence.Table;
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="employee_id")
 	private int employeeId;
 
@@ -49,8 +49,8 @@ public class Employee {
 	private String designation;
 	
 	@OneToOne
-	  (cascade= {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.REFRESH })
-	  @JoinColumn(name="personal_id")
+	  (cascade= CascadeType.ALL)
+	@JoinColumn(name="personal_id")
 	private PersonalDetails personalDetails;
 	
 	@Column(name="status")
