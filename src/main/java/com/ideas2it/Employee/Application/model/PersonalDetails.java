@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,12 +24,6 @@ import javax.persistence.Table;
  * details such as name,emailid,phonenumber It holds Address details
  * 
  * @version 1.0
- */
-
-/*
- * <set name="addressSet" cascade="persist,refresh,merge" lazy="true"> <key
- * column="personal_id"/> <one-to-many
- * class="com.ideas2it.Employee.Application.model.Address"/>
  */
 @Entity
 @Table(name = "personal_details")
@@ -52,7 +47,8 @@ public class PersonalDetails {
 	private String phoneNumber;
 
 	@OneToMany (mappedBy="personalDetails",
-			cascade= CascadeType.ALL )
+			cascade= {CascadeType.PERSIST , CascadeType.MERGE ,
+					CascadeType.REFRESH } )
 	private Set<Address> addressSet;
 
 
@@ -119,17 +115,9 @@ public class PersonalDetails {
 		this.name = name;
 	}
 
-	/*
-	 * public Employee getEmployee() { return employee; } public void
-	 * setEmployee(Employee employee) { this.employee = employee; }
-	 */
-
-	// this.employee = employee+
-	// getAddressSet().toString(); // }
-
 	@Override
 	public String toString() {
 		return " \n PersonalDetails : \n  PersonalId" + getPersonalId() + "\n Name :" + getName() + "\n Phonenumber : "
-				+ getPhoneNumber() + "\n EmailId : " + getEmailId() + "\n Date of birth : " + getDateOfBirth();
+				+ getPhoneNumber() + "\n EmailId : " + getEmailId() + "\n Date of birth : " + getDateOfBirth() + "" + getAddressSet().toString();
 	}
 }

@@ -25,35 +25,35 @@ import javax.persistence.Table;
 @Entity
 @Table(name="address_details")
 public class Address {
-	/*name="personalDetails" column="personal_id" cascade="persist,refresh,merge" lazy="proxy"> </many-to-one>*/
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="address_id")
 	private int addressId;
-	
+
 	@Column(name="pin_code")
 	private int pinCode;
-	
+
 	@Column(name="street")
 	private String street;
-	
+
 	@Column(name="district")
 	private String district;
-	
+
 	@Column(name="city")
 	private String city;
-	
+
 	@Column(name="state")
 	private String state;
-	
+
 	@Column(name="address_type")
 	private String addressType;
-	
-	
-      @ManyToOne(cascade= CascadeType.ALL 	, fetch = FetchType.LAZY )
-	  @JoinColumn(name="personal_id")
-	  private PersonalDetails personalDetails;
-	 
+
+
+	@ManyToOne(cascade= CascadeType.ALL 	, fetch = FetchType.LAZY )
+	@JoinColumn(name="personal_id")
+	private PersonalDetails personalDetails;
+
 
 	/**
 	 * Default Constructor which creates an empty object of Address
@@ -130,12 +130,15 @@ public class Address {
 		this.addressType = addressType;
 	}
 
-	
-	  public PersonalDetails getPersonalDetails() { return personalDetails; }
-	  
-	  public void setPersonalDetails(PersonalDetails personal_details) {
-	  this.personalDetails = personal_details; }
-	 
+
+	public PersonalDetails getPersonalDetails() {
+		return personalDetails;
+	}
+
+	public void setPersonalDetails(PersonalDetails personal_details) {
+		this.personalDetails = personal_details; 
+	}
+
 
 	@Override
 	public String toString() {

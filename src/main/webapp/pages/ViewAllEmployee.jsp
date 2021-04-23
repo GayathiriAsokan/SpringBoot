@@ -67,8 +67,10 @@ display:none;
 <th class="display view">ProjectID</th>
 <th class="display view">ProjectName</th>
 </tr>
-<% EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
+<%System.out.println("hi seravd");
+EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
 List <Employee> employeeList = employeeService.getAllEmployee();
+System.out.println(employeeList);
 for (int index = 0 ; index < employeeList.size() ; index ++) {
         Employee employee = employeeList.get(index);%>
         <tr>

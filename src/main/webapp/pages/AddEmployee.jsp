@@ -118,9 +118,10 @@ body {
 	<form id="commentForm" name="commentForm" method="post"
 		<% 
 	 int mode = Integer.parseInt(request.getParameter("mode"));
-	 if (mode == 1) {%>
+	 if (mode == 1) {
+	%>
 		action= Insert/submit
-		<%} 
+		<%System.out.println(mode); } 
         else if (mode == 2)  {%>
 		action=Update/submit
 		<%}

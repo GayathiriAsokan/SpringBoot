@@ -11,19 +11,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.ideas2it.Employee.Application.dao.Impl.EmployeeDaoImpl;
 import com.ideas2it.Employee.Application.model.Address;
 import com.ideas2it.Employee.Application.model.Employee;
 import com.ideas2it.Employee.Application.model.PersonalDetails;
+import com.ideas2it.Employee.Application.repository.EmployeeRepository;
 import com.ideas2it.Employee.Application.service.EmployeeService;
-//import com.ideas2it.util.Validator;
-
 
 /**
  * @description EmployeeService used to hold PersonalDetails,Address,Employee
@@ -34,46 +33,31 @@ import com.ideas2it.Employee.Application.service.EmployeeService;
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-	//Validator validator = new Validator();
-	
-	 @Autowired
-	 private EmployeeDaoImpl employeeDAO;
-	//LoggerClass logger = new LoggerClass();
+
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String insertEmployee(String companyName, double salary, String designation, int experience, String status,
+	public Employee insertEmployee(String companyName, double salary, String designation, int experience, String status,
 			String name, long phoneNumber, String dateOfBirth, String emailId, HashMap <String, Object> currentAddressMap , HashMap <String, Object> permanentAddressMap) {
 		String mobileNumber = Long.toString(phoneNumber);
 		String insertStatus = "";
-		List <Integer> employeeList = validateEmployeeData(phoneNumber, emailId); 
-		if (0 !=  employeeList.get(0) &&  0 != employeeList.get(1) ) {
-			//logger.loggerError(Constants.DUPLICATE_ERROR_MESSAGE);
-			insertStatus =  "DUPLICATE PHONE NUMBER AND EMAILID";
-		} else if (employeeList.get(1) != 0) {
-			//logger.loggerError(Constants.DUPLICATE_EMAILID_MESSAGE);
-			insertStatus = "DUPLICATE EMAILID"; 
-		} else if (employeeList.get(0) != 0) {
-			//logger.loggerError(Constants.DUPLICATE_PHONENUMBER_MESSAGE);
-			insertStatus = "DUPLICATE PHONE NUMBER";
-		} else {
-			PersonalDetails personalDetails = new PersonalDetails(name, emailId, dateOfBirth, mobileNumber);
-			Address currentAddress = addAddressValues(currentAddressMap);
-			Address permanentAddress = addAddressValues(permanentAddressMap);
-			Set <Address> address = new HashSet <Address> ();
-			address.add(currentAddress);
-			address.add(permanentAddress);
-			//personalDetails.setAddressSet(address);
-			Employee employee = new Employee(companyName, salary, experience, designation, status);
-			employee.setPersonalDetails(personalDetails);
-			employeeDAO.insertEmployee(employee.getSalary(), employee.getCompanyName(),
-					employee.getDesignation(), employee.getExperience(), employee.getStatus(), personalDetails.getName(), personalDetails.getPhoneNumber(), personalDetails.getEmailId(), 
-					personalDetails.getDateOfBirth(), currentAddress, permanentAddress);
-			insertStatus = "INSERTED SUCCESSFULLY";
-		}
-		return insertStatus;
+		PersonalDetails personalDetails = new PersonalDetails(name, emailId, dateOfBirth, mobileNumber);
+		Address currentAddress = addAddressValues(currentAddressMap);
+		Address permanentAddress = addAddressValues(permanentAddressMap);
+		Set <Address> address = new HashSet <Address> ();
+		address.add(currentAddress);
+		address.add(permanentAddress);
+		personalDetails.setAddressSet(address);
+		Employee employee = new Employee(companyName, salary, experience, designation, status);
+		employee.setPersonalDetails(personalDetails);
+		currentAddress.setPersonalDetails(personalDetails); 
+		permanentAddress.setPersonalDetails(personalDetails);
+		return employeeRepository.save(employee);
 	}
 
 	/**
@@ -81,7 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 */
 	@Override
 	public List<Employee> getAllEmployee() {
-		return employeeDAO.viewEmployee();
+		return this.employeeRepository.findAll();
 	}
 
 	/**
@@ -89,7 +73,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 */
 	@Override
 	public Employee getEmployee(int employeeId) {
-		return employeeDAO.employeeViewById(employeeId);
+		Optional<Employee> employee = this.employeeRepository.findById(employeeId);
+		return employee.get(); 
 	}
 
 	/**
@@ -97,7 +82,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 */
 	@Override
 	public String deleteEmployee(int employeeId) {
-		employeeDAO.deleteEmployee(employeeId);
+		Optional<Employee> employees = this.employeeRepository.findById(employeeId);
+		Employee employee = employees.get();
+		employee.setStatus("INACTIVE");
+		employeeRepository.save(employee);
 		return "DELETED SUCCESSFULLY";
 	}
 
@@ -118,7 +106,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	/**
 	 * {@inheritDoc}
-	 */
+	 *
 	@Override
 	public List<Integer> validateEmployeeData(long phoneNumber, String emailId) {
 		return employeeDAO.isDuplicate(phoneNumber, emailId);
@@ -129,15 +117,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 */
 	@Override
 	public String updatePersonalDetails(int employeeId, long phoneNumber, String emailId) {
-		List<Integer> employeeList = new ArrayList<Integer>();
-		employeeList = validateEmployeeData(phoneNumber, emailId);
-		if (employeeList.get(0) == 0 && employeeList.get(1) == 0) {
-			employeeDAO.updatePersonalDetails(employeeId, phoneNumber, emailId);
-			return "UPDATED SUCCESSFULLY";
-		} else {
-			//logger.loggerError(Constants.DUPLICATE_EMPLOYEE_MESSAGE);
-			return "ALREADY EXIXTS  DUPLICATE VALUE";
-		}
+		Optional<Employee> employees = this.employeeRepository.findById(employeeId);
+		Employee employee = employees.get();
+		employee.getPersonalDetails().setPhoneNumber(Long.toString(phoneNumber));
+		employee.getPersonalDetails().setEmailId(emailId);
+		employeeRepository.save(employee);
+		return "UPDATED SUCCESSFULLY";
 	}
 
 	/**

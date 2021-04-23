@@ -8,6 +8,7 @@ package com.ideas2it.Employee.Application.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import com.ideas2it.Employee.Application.model.Address;
 import com.ideas2it.Employee.Application.model.Employee;
@@ -38,7 +39,7 @@ public interface EmployeeService {
 	 * @param street string -  property in address
 	 * @return String - to return message status of the employee details
 	 */
-	public String insertEmployee(String companyName, double salary, String designation, int experience, String status, 
+	public Employee insertEmployee(String companyName, double salary, String designation, int experience, String status, 
 			String name, long phoneNumber, String dateOfBirth, String emailId, HashMap <String, Object> currentAddressMap , HashMap <String, Object> permanentAddressMap);
 
 	/**
@@ -79,7 +80,7 @@ public interface EmployeeService {
 	 * @param  employeeId int
 	 * @param phoneNumber long
 	 * @return employeeList List <Integer> 
-	 */
+	 *
 	public List<Integer> validateEmployeeData(long phoneNumber, String emailId);
 
 	/**

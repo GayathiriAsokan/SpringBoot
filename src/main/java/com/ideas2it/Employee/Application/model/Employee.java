@@ -19,18 +19,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-
 /**
  * Employee class is a model class 
- * It is used to hold the user employee details such as project name, salary
- * It holds Personal details
+ * It is used to hold the user employee details 
+ * It holds Personal details of employee
  * @version 1.0
  */
 @Entity
 @Table(name="employee")
 public class Employee {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="employee_id")
@@ -38,21 +36,21 @@ public class Employee {
 
 	@Column(name="company_name")
 	private String companyName;
-	
+
 	@Column(name="salary")
 	private double salary;
-	
+
 	@Column(name="experience")
 	private int experience;
-	
+
 	@Column(name="designation")
 	private String designation;
-	
+
 	@OneToOne
-	  (cascade= CascadeType.ALL)
+	(cascade= CascadeType.ALL)
 	@JoinColumn(name="personal_id")
 	private PersonalDetails personalDetails;
-	
+
 	@Column(name="status")
 	private String status;
 
@@ -122,15 +120,6 @@ public class Employee {
 		this.personalDetails = personalDetails;
 	}
 
-
-//	public Set<Project> getProjectSet() {
-//		return projectSet; 
-//	}
-//
-//	public void setProjectSet(Set<Project> projectSet) { 
-//		this.projectSet = projectSet; 
-//	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -138,17 +127,6 @@ public class Employee {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-//	public Set<Integer> getProjectId(){ 
-//		Set<Project> project = new HashSet <Project> (); 
-//		Set<Integer> projectId = new HashSet <Integer> ();
-//		project.addAll(getProjectSet()); 
-//		for (Project projectIterator : project) {
-//			projectId.add(projectIterator.getProjectId());
-//		} 
-//		return projectId; 
-//	}  + getProjectId()
-
 
 	@Override
 	public String toString() {
