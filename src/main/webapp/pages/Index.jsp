@@ -63,12 +63,12 @@ position: absolute;
     left: 441px;
     font-size: x-large;">
 <h2>Project Details</h2>
-<p><a href="/fg/ProjectController/Insert?mode=1">INSERT</a>
-<p><a href="/fg/ProjectController/Update?mode=2">UPDATE</a>
-<p><a href="/fg/ProjectController/Delete?mode=6">DELETE</a>
-<p><a href="/fg/ProjectController/ViewAllProject">DISPLAY PROJECT DETAILS</a>
-<p><a href="/fg/ProjectController/View?mode=4">DISPLAY PROJECT</a>
-<p><a href="/fg/ProjectController/AddEmployee?mode=5">ADD PROJECT TO EMPLOYEE</a>
+<p><a href="RolesController/Insert?mode=1">INSERT</a>
+<p><a href="RolesController/Update?mode=2">UPDATE</a>
+<p><a href="RolesController/Delete?mode=6">DELETE</a>
+<p><a href="RolesController/ViewAllProject">DISPLAY PROJECT DETAILS</a>
+<p><a href="RolesController/View?mode=4">DISPLAY PROJECT</a>
+<p><a href="RolesController/AddEmployee?mode=5">ADD PROJECT TO EMPLOYEE</a>
 </div>
 </body>
 </html>

@@ -18,10 +18,10 @@ import org.json.JSONObject;
 //import org.json.JSONArray;
 //import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,22 +29,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import com.ideas2it.Employee.Application.model.Address;
 import com.ideas2it.Employee.Application.service.EmployeeService;
 
 //import com.mysql.cj.xdevapi.JsonArray;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 
 /**
  * @description AddEmployee is used to add employee values 
  * @author GAYATHIRI
  */
+//@RestController("/employee")
 @Controller
-public class EmployeeController extends HttpServlet {
+public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
@@ -54,7 +55,7 @@ public class EmployeeController extends HttpServlet {
 	 * @throws IOException 
 	 * @throws ServletException 
 	 */
-	@RequestMapping("/")  
+	 @GetMapping(value = "/") 
 	public String Index() {
 		return "Index";
 	}
