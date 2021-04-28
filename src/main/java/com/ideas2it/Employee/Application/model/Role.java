@@ -1,11 +1,14 @@
 package com.ideas2it.Employee.Application.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  * Role is  uesd to create  a role  for Employee
@@ -26,6 +29,9 @@ public class Role {
 	
 	@Column(name="employee_id")
 	private int employeeId;
+	
+	@ManyToMany( mappedBy = "roles") 
+	private List<Employee> employee;
 	
 	/**
 	 * Default Constructor

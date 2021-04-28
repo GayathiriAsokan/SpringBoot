@@ -1,5 +1,6 @@
 package com.ideas2it.Employee.Application.service.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class RoleServiceImpl implements RoleService{
 	@Autowired
 	private RoleRepository  roleRepository;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String insertRole(int employeeId, String roleName) {
 		if(isEmployeeById(employeeId)) {
@@ -30,10 +34,13 @@ public class RoleServiceImpl implements RoleService{
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public String updateRole(int employeeId, int projectId) {
+	public String updateRole(int employeeId, int roleId) {
 		if(isEmployeeById(employeeId)) {
-			Optional<Role> employees = this.roleRepository.findById(employeeId);
+			Optional<Role> employees = this.roleRepository.findById(roleId);
 			Role role = employees.get();
 			role.setEmployeeId(employeeId);
 			roleRepository.save(role);
@@ -43,11 +50,28 @@ public class RoleServiceImpl implements RoleService{
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isEmployeeById(int employeeId) {
 		if (employeeRepository.existsById(employeeId)) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Role getRole(int employeeId) {
+		Optional<Role> role = this.roleRepository.findById(employeeId);
+		return role.get(); 
+	}
+
+	@Override
+	public List<Role> getAllRole() {
+		return this.roleRepository.findAll();
 	}
 }

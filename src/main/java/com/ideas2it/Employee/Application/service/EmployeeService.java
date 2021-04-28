@@ -48,7 +48,7 @@ public interface EmployeeService {
 	 * 
 	 * @return employeeMap Map <Integer,Employee> - to print employee details
 	 */
-	public List<Employee> getAllEmployee();
+	public Iterable<Employee> getAllEmployee();
 
 	/**
 	 * ViewsingleData method  used to display the employee data

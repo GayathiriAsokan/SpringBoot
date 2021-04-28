@@ -26,36 +26,35 @@ body {
 	src="http://cdnjs.cloudflare.com/ajax/libs/json2/20130526/json2.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		/* function view_only() {
-			$("#CompanyName").attr("readonly", true);
+		 function view_only() {
+			$("#RoleName").attr("readonly", true);
 			$('.non_editable').addClass('view_only');
 		}
 		$('#SEARCH').click(function() {
 			if ($('#mode').val() == "2") {
 				 view_only();
-				$("#PhoneNumber").attr("readonly", false);
-				$("#EmailId").attr("readonly", false);
+				$("#EmployeeId").attr("readonly", false);
 			} else if ($('#mode').val() == "3") {
 				 view_only();
 			     $("#Status").attr("readonly", false);
 			} else if ($('#mode').val() == "4") {
 				view_only();
 			}
-			var employeeId = $('#EmployeeId');
-			console.log(employeeId);
+			var RoleId = $('#RoleId');
+			console.log(RoleId);
 			$.ajax({
 				type : "GET",
 				url : "Update/ajax",
-				data : employeeId,
+				data : RoleId,
 				success : function(data) {
 					var arrayEmployeeValues = JSON.parse(data);
-					var employeeMap = arrayEmployeeValues[0];
-				/* 	$("#CompanyName").val(employeeMap.companyName);
-					$("#Salary").val(employeeMap.salary); */
+					var role = arrayEmployeeValues[0];
+				 	$("#EmployeeId").val(role.employeeId);
+					$("#RoleName").val(role.roleName); 
 				}
 			});
 		});
-		}); */
+		}); 
 </script>
 </head>
 <body>
@@ -77,8 +76,8 @@ body {
 			 mode = Integer.parseInt(request.getParameter("mode"));
 		if (mode > 1) {
 		%>
-			<label for="EmployeeId"> EmployeeId: </label><br> <input
-				type="number" id="EmployeeId" name="EmployeeId" required> <input
+			<label for="RoleId"> RoleId: </label><br> <input
+				type="number" id="RoleId" name="RoleId" required> <input
 				type="button" id="SEARCH" value="SEARCH">
 			<%
 			}

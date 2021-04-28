@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Employee> getAllEmployee() {
+	public Iterable<Employee> getAllEmployee() {
 		return this.employeeRepository.findAll();
 	}
 

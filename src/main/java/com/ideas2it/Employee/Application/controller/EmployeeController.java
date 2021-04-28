@@ -1,5 +1,5 @@
 /**
- * Provide necessary to create a servlet class in controller
+ * Provide necessary to create a url mappping  in controller
  */
 package com.ideas2it.Employee.Application.controller;
 
@@ -36,7 +36,6 @@ import javax.servlet.ServletException;
 import com.ideas2it.Employee.Application.model.Address;
 import com.ideas2it.Employee.Application.service.EmployeeService;
 
-//import com.mysql.cj.xdevapi.JsonArray;
 
 
 /**
@@ -76,31 +75,31 @@ public class EmployeeController {
 	 * InsertEmployee method is used to add employee details 
 	 */
 	@RequestMapping("/EmployeeController/Insert/submit")  
-	public String insertEmployee(@RequestParam Map<String, String> allRequestParam, Model model) {
-		System.out.println(allRequestParam);
-		String companyName = allRequestParam.get("CompanyName"); 
-		double salary = Double.parseDouble(allRequestParam.get("Salary")); 
-		String designation = allRequestParam.get("Designation"); 
-		int experience = Integer.parseInt(allRequestParam.get("Experience")); 
-		String status =		allRequestParam.get("Status"); String name = allRequestParam.get("Name");
-		long phoneNumber = Long.parseLong(allRequestParam.get("PhoneNumber")); 
-		String emailId = allRequestParam.get("EmailId");
-		String dateOfBirth = allRequestParam.get("DateOfBirth");
+	public String insertEmployee(@RequestParam Map<String, String> requestParam, Model model) {
+		System.out.println(requestParam);
+		String companyName = requestParam.get("CompanyName"); 
+		double salary = Double.parseDouble(requestParam.get("Salary")); 
+		String designation = requestParam.get("Designation"); 
+		int experience = Integer.parseInt(requestParam.get("Experience")); 
+		String status =		requestParam.get("Status"); String name = requestParam.get("Name");
+		long phoneNumber = Long.parseLong(requestParam.get("PhoneNumber")); 
+		String emailId = requestParam.get("EmailId");
+		String dateOfBirth = requestParam.get("DateOfBirth");
 		HashMap <String, Object>	currentAddressMap = new HashMap <String, Object>();
-		currentAddressMap.put("Street", allRequestParam.get("Street"));
-		currentAddressMap.put("City", allRequestParam.get("City"));
-		currentAddressMap.put("District", allRequestParam.get("District"));
+		currentAddressMap.put("Street", requestParam.get("Street"));
+		currentAddressMap.put("City", requestParam.get("City"));
+		currentAddressMap.put("District", requestParam.get("District"));
 		currentAddressMap.put("PinCode",
-				Integer.parseInt(allRequestParam.get("PinCode")));
-		currentAddressMap.put("State", allRequestParam.get("State"));
-		currentAddressMap.put("AddressType", allRequestParam.get("AddressType"));
+				Integer.parseInt(requestParam.get("PinCode")));
+		currentAddressMap.put("State", requestParam.get("State"));
+		currentAddressMap.put("AddressType", requestParam.get("AddressType"));
 		HashMap <String, Object> permanentAddressMap = new HashMap <String, Object>();
-		permanentAddressMap.put("Street",  allRequestParam.get("PermanentStreet"));
-		permanentAddressMap.put("City",  allRequestParam.get("PermanentCity"));
-		permanentAddressMap.put("District",  allRequestParam.get("PermanentDistrict"));
-		permanentAddressMap.put("PinCode", Integer.parseInt(allRequestParam.get("PermanentPinCode")));  
-		permanentAddressMap.put("State", allRequestParam.get("PermanentState"));
-		permanentAddressMap.put("AddressType", allRequestParam.get("PermanentAddressType")); 
+		permanentAddressMap.put("Street",  requestParam.get("PermanentStreet"));
+		permanentAddressMap.put("City",  requestParam.get("PermanentCity"));
+		permanentAddressMap.put("District",  requestParam.get("PermanentDistrict"));
+		permanentAddressMap.put("PinCode", Integer.parseInt(requestParam.get("PermanentPinCode")));  
+		permanentAddressMap.put("State", requestParam.get("PermanentState"));
+		permanentAddressMap.put("AddressType", requestParam.get("PermanentAddressType")); 
 		employeeService.insertEmployee(companyName, salary, designation, experience,
 				status, name, phoneNumber, dateOfBirth, emailId, currentAddressMap,
 				permanentAddressMap);
@@ -161,10 +160,10 @@ public class EmployeeController {
 	 * @throws ServletException 
 	 */
 	@RequestMapping("/EmployeeController/Update/submit")  
-	public String updateEmployee(@RequestParam Map<String, String> allRequestParam, Model model) {
-		int employeeId = Integer.parseInt(allRequestParam.get("EmployeeId")); 
-		long phoneNumber = Long.parseLong(allRequestParam.get("PhoneNumber"));
-		String emailId = allRequestParam.get("EmailId");
+	public String updateEmployee(@RequestParam Map<String, String> requestParam, Model model) {
+		int employeeId = Integer.parseInt(requestParam.get("EmployeeId")); 
+		long phoneNumber = Long.parseLong(requestParam.get("PhoneNumber"));
+		String emailId = requestParam.get("EmailId");
 		String status = employeeService.updatePersonalDetails(employeeId, phoneNumber, emailId);
 		model.addAttribute("status", status);
 		System.out.println(status);
@@ -177,8 +176,8 @@ public class EmployeeController {
 	 * @throws ServletException 
 	 */
 	@RequestMapping("/EmployeeController/Delete/submit")  
-	public String deleteEmployee(@RequestParam Map<String, String> allRequestParam, Model model) {
-		int employeeId = Integer.parseInt(allRequestParam.get("EmployeeId")); 
+	public String deleteEmployee(@RequestParam Map<String, String> requestParam, Model model) {
+		int employeeId = Integer.parseInt(requestParam.get("EmployeeId")); 
 		String status = employeeService.deleteEmployee(employeeId);
 		model.addAttribute("status", status);
 		System.out.println(status);
@@ -193,5 +192,33 @@ public class EmployeeController {
 	@RequestMapping("/EmployeeController/ViewAll")  
 	public String displayEmployee() {
 		return "ViewAllEmployee";
+	}
+	
+	/**
+	 * InsertEmployeeToProject method is used to add project to employee
+	 */
+	@RequestMapping("/EmployeeController/AddRole")  
+	public String insertEmployeeToProject() {
+		return "EmployeeRole";
+	}
+	
+	/** AddEmployeeToProject is used to add employee and project Details
+	 * To insert and view the employee and project
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	@RequestMapping("/EmployeeController/AddRole/submit")
+	public String addEmployeeToProject(@RequestParam Map <String, String> allRequestParam, Model model) {
+		/*
+		 * List <Integer> listProjectId = new ArrayList <Integer> (); int employeeId =
+		 * Integer.parseInt(allRequestParam.get("Employee")); String [] project =
+		 * allRequestParam.get("Project"); for (int index = 0; index < project.length ;
+		 * index ++) { System.out.println(project[index]);
+		 * listProjectId.add(Integer.parseInt(project[index])); }
+		 * System.out.println(listProjectId); String status =
+		 * employeeService.addProjectEmployee(listProjectId, employeeId);
+		 * model.addAttribute("status", status); System.out.println(status);
+		 */
+		return "EmployeeSubmission";
 	}
 }

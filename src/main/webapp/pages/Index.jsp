@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EMPLOYEE PROJECT MANAGEMENT</title>
+<title>EMPLOYEE ROLE MANAGEMENT</title>
 <script>
 function employeeFunction() {
 	if (document.getElementById("project").checked) {
@@ -23,7 +23,7 @@ position: absolute;
     left: 299px; 
     color: darkblue; 
     font-size: -webkit-xxx-large;">
-    EMPLOYEE PROJECT MANAGEMENT</h1>
+    EMPLOYEE ROLE MANAGEMENT</h1>
 <div id="EmployeeRadiDivision" style="
 position: absolute;
     top: 140px;
@@ -40,7 +40,7 @@ position: absolute;
     color: red;
     font-size: x-large;">
 <input type="radio" id ="project" name="employeeApplication" onchange="employeeFunction()"/>
-<label for ="project">PROJECT DETAILS</label><br>
+<label for ="project">ROLE DETAILS</label><br>
 </div>
 <div id="EmployeeDivision" style="
     visibility: visible;
@@ -54,7 +54,7 @@ position: absolute;
 <p><a href="EmployeeController/Delete?mode=3">DELETE</a>
 <p><a href="EmployeeController/ViewAll">DISPLAY EMPLOYEE DETAILS</a>
 <p><a href="EmployeeController/View?mode=4">DISPLAY EMPLOYEE</a>
-<p><a href="EmployeeController/AddProject?mode=5"> ADD EMPLOYEE TO PROJECT</a>
+<p><a href="EmployeeController/AddRole?mode=5"> ADD EMPLOYEE TO PROJECT</a>
 </div>
 <div id="ProjectDivision" style="
     visibility: hidden;
@@ -62,7 +62,7 @@ position: absolute;
     top:  280px;
     left: 441px;
     font-size: x-large;">
-<h2>Project Details</h2>
+<h2>Role Details</h2>
 <p><a href="RolesController/Insert?mode=1">INSERT</a>
 <p><a href="RolesController/Update?mode=2">UPDATE</a>
 <p><a href="RolesController/Delete?mode=6">DELETE</a>

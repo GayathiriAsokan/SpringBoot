@@ -7,6 +7,7 @@
 package com.ideas2it.Employee.Application.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -54,6 +57,13 @@ public class Employee {
 	@Column(name="status")
 	private String status;
 
+	
+	  @ManyToMany
+	  @JoinTable( name = "employee_role", 
+	  joinColumns = @JoinColumn(name = "employee_id"),
+	  inverseJoinColumns = @JoinColumn(name = "role_id") )
+	  private List<Role> roles;
+	 
 	/**
 	 * Default Constructor which creates an empty object of Employee
 	 */
@@ -79,6 +89,16 @@ public class Employee {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+
+
+	public List<Role> getRoles() { 
+		return roles; 
+	}
+
+	public void setRoles(List<Role> roles) { 
+		this.roles = roles; 
+	}
+
 
 	public double getSalary() {
 		return salary;
@@ -132,6 +152,6 @@ public class Employee {
 	public String toString() {
 		return "\n Employee : EmployeeId : " + getEmployeeId() + "\n CompanyName : " + getCompanyName() + "\n Salary : "
 				+ getSalary() + "\n Designation : " + getDesignation() + "\n Experience : " + getExperience() + "\n Status" + getStatus() + " "
-				+ getPersonalDetails().toString();
+				+ getPersonalDetails().toString() + "" + getRoles().toString();
 	}
 }
