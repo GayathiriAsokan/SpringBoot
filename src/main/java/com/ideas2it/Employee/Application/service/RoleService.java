@@ -42,6 +42,6 @@ public interface RoleService {
 	 *  Get all roles
 	 * @return
 	 */
-	public List<Role>  getAllRole();
+	public List <Role>  getAllRole();
 	
 }

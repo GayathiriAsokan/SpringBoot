@@ -3,6 +3,7 @@
  */
 package com.ideas2it.Employee.Application.controller;
 
+import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ideas2it.Employee.Application.model.Role;
 import com.ideas2it.Employee.Application.service.RoleService;
 
 /**
@@ -82,5 +84,17 @@ public class RoleController {
 		String status = roleService.updateRole(employeeId, roleId);
 		model.addAttribute("status", status); 
 		return "EmployeeSubmission";
+	}
+
+
+	/**
+	 * 
+	 */
+	@RequestMapping("/RolesController/ViewAllProject")
+	public String viewAll(Model model) {
+		List<Role> roles = roleService.getAllRole();
+		model.addAttribute("roles", roles); 
+		//System.out.println();
+		return "ViewRoles";
 	}
 }

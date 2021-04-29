@@ -1,5 +1,6 @@
 package com.ideas2it.Employee.Application.service.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,7 +72,9 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public List<Role> getAllRole() {
-		return this.roleRepository.findAll();
+	public List <Role> getAllRole() {
+		List <Role> roles = new ArrayList<Role> ();
+		 roleRepository.findAll().forEach(roles :: add);
+		 return roles;
 	}
 }

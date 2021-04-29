@@ -20,8 +20,12 @@ import org.springframework.stereotype.Service;
 
 import com.ideas2it.Employee.Application.model.Address;
 import com.ideas2it.Employee.Application.model.Employee;
+import com.ideas2it.Employee.Application.model.EmployeeRole;
 import com.ideas2it.Employee.Application.model.PersonalDetails;
+import com.ideas2it.Employee.Application.model.Role;
 import com.ideas2it.Employee.Application.repository.EmployeeRepository;
+import com.ideas2it.Employee.Application.repository.EmployeeRoleRepository;
+import com.ideas2it.Employee.Application.repository.RoleRepository;
 import com.ideas2it.Employee.Application.service.EmployeeService;
 
 /**
@@ -38,6 +42,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
+	private EmployeeRoleRepository employeeRoleRepository;
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -64,8 +74,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Iterable<Employee> getAllEmployee() {
-		return this.employeeRepository.findAll();
+	public List <Employee> getAllEmployee() {
+		 List<Employee> employees = (List<Employee>) this.employeeRepository.findAll();
+		return employees;
 	}
 
 	/**
@@ -129,9 +140,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String addProjectEmployee(List <Integer> listId, int employeeId) {
-		//employeeDAO.addProjectEmployee(listId, employeeId);
+	public String addProjectEmployee(String listId,String roleId) {
+		EmployeeRole employeeRole = new EmployeeRole(listId.charAt(0),roleId.charAt(0));
+		employeeRoleRepository.save(employeeRole);
+		EmployeeRole employeeRoles = new EmployeeRole(listId.charAt(2),roleId.charAt(2));
+		employeeRoleRepository.save(employeeRoles);
 		return "success";
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List <Integer>  findAll() {
+		List <Integer> count = new ArrayList <Integer> ();
+		count.add((int) roleRepository.count());
+		count.add((int) employeeRepository.count());
+		return count;
 	}
 }
 

@@ -48,7 +48,7 @@ public interface EmployeeService {
 	 * 
 	 * @return employeeMap Map <Integer,Employee> - to print employee details
 	 */
-	public Iterable<Employee> getAllEmployee();
+	public List <Employee> getAllEmployee();
 
 	/**
 	 * ViewsingleData method  used to display the employee data
@@ -98,5 +98,11 @@ public interface EmployeeService {
 	 * @param employeeId
 	 * @return String
 	 */
-	public String addProjectEmployee(List <Integer> listId, int employeeId);
+	public String addProjectEmployee(String listId,String roleId);
+	
+	/**
+	 * Find all employees and roles by id
+	 * @return
+	 */
+	public List <Integer>  findAll();
 }

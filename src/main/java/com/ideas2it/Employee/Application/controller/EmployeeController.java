@@ -34,15 +34,16 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 import com.ideas2it.Employee.Application.model.Address;
+import com.ideas2it.Employee.Application.model.Employee;
+import com.ideas2it.Employee.Application.model.Role;
 import com.ideas2it.Employee.Application.service.EmployeeService;
-
+import com.ideas2it.Employee.Application.model.EmployeeRole;
 
 
 /**
  * @description AddEmployee is used to add employee values 
  * @author GAYATHIRI
  */
-//@RestController("/employee")
 @Controller
 public class EmployeeController {
 
@@ -190,7 +191,9 @@ public class EmployeeController {
 	 * @throws ServletException 
 	 */
 	@RequestMapping("/EmployeeController/ViewAll")  
-	public String displayEmployee() {
+	public String displayEmployee(Model model) {
+		List<Employee> employees = employeeService.getAllEmployee();
+		model.addAttribute("employees", employees); 
 		return "ViewAllEmployee";
 	}
 	
@@ -198,7 +201,10 @@ public class EmployeeController {
 	 * InsertEmployeeToProject method is used to add project to employee
 	 */
 	@RequestMapping("/EmployeeController/AddRole")  
-	public String insertEmployeeToProject() {
+	public String insertEmployeeToProject(Model model) {
+		List<Integer> employees = employeeService.findAll();
+		model.addAttribute("employeeById", employees.get(1));
+		model.addAttribute("rolesById", employees.get(0));
 		return "EmployeeRole";
 	}
 	
@@ -208,17 +214,23 @@ public class EmployeeController {
 	 * @throws ServletException 
 	 */
 	@RequestMapping("/EmployeeController/AddRole/submit")
-	public String addEmployeeToProject(@RequestParam Map <String, String> allRequestParam, Model model) {
+	public String addEmployeeToProject(@RequestParam  Map<String,String> requestParam, Model model) {
+		System.out.println(requestParam);
+		String employeeId = requestParam.get("employee");
+		String roleId =  requestParam.get("roles");
+		System.out.println(employeeId + "" + roleId);
+		String status = employeeService.addProjectEmployee(employeeId, roleId);
 		/*
 		 * List <Integer> listProjectId = new ArrayList <Integer> (); int employeeId =
-		 * Integer.parseInt(allRequestParam.get("Employee")); String [] project =
-		 * allRequestParam.get("Project"); for (int index = 0; index < project.length ;
-		 * index ++) { System.out.println(project[index]);
+		 * Integer.parseInt(requestParam.get("Employee")); String [] project =
+		 * requestParam.get("Project"); for (int index = 0; index < project.length
+		 * ;index ++) { System.out.println(project[index]);
 		 * listProjectId.add(Integer.parseInt(project[index])); }
 		 * System.out.println(listProjectId); String status =
 		 * employeeService.addProjectEmployee(listProjectId, employeeId);
 		 * model.addAttribute("status", status); System.out.println(status);
 		 */
+		 model.addAttribute("status", status);
 		return "EmployeeSubmission";
 	}
 }
