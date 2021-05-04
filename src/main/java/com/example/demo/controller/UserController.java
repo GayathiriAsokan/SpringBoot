@@ -105,17 +105,4 @@ public class UserController {
 		}
 		return userService.getById(id);
 	}
-	
-	/**
-	 * It is used to handle the exception and send to response entity
-	 * @param exception
-	 * @return Http response for objects
-	 */
-	@ExceptionHandler
-	public ResponseEntity<UserErrorResponse> handleException(UserNotExist exception) {
-		error.setStatus(HttpStatus.NOT_FOUND.value());
-		error.setMessage(exception.getMessage());
-		error.setTimeStamp(System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND) ;
-	}
 }

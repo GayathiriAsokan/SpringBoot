@@ -7,6 +7,8 @@ import org.jboss.logging.Logger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.Model.User;
+
 /**
  * @description Logger class is used for sent the information and error messages
  * @author GAYATHIRI
@@ -31,6 +33,13 @@ public class LoggerClass {
 		 logger.info(message);
 	 }
      
+	 /**
+	  *  To display info user from logger
+	  */
+	 public void logger(User user) {
+		 logger.info(user);
+	 }
+	 
 	 /**
 	  *  This error can simply not continue the  appliication
 	  */
