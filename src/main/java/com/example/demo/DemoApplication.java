@@ -21,17 +21,12 @@ import com.example.demo.Logger.LoggerClass;
 @EnableAspectJAutoProxy(proxyTargetClass=true)  
 public class DemoApplication {
 	
-	/*
-	 * @Autowired static LoggerClass logger;
-	 */
-	
 	/**
 	 * Main is used to start the application
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		//logger.loggerInfo("Server started");
 	}	 
 
 }

@@ -13,6 +13,11 @@ import org.springframework.stereotype.Component;
 import com.example.demo.Logger.LoggerClass;
 import com.example.demo.Model.User;
 
+/**
+ * Adding some additional behaviour in existing code without modify the code itself
+ * @author ubuntu
+ *
+ */
 @Aspect  
 @Component  
 public class UserServiceAspect {
@@ -20,6 +25,10 @@ public class UserServiceAspect {
 	@Autowired
 	LoggerClass logger;
 	/**
+	 * 
+	 * @param joinPoint
+	 * @param user
+	 *
 	@Before(value = "execution(* com.example.demo.Service.UserService.*(..)) and args(user)")
 	public void  beforeAdvice(JoinPoint joinPoint, User user) {
 		logger.loggerInfo("Before method:" + joinPoint.getSignature());
@@ -58,11 +67,11 @@ public class UserServiceAspect {
 	 * Implementing after returning advice     
 	 * @param joinPoint
 	 * @param account
-	 */
+	  */
 	@AfterReturning(value="execution(* com.example.demo.Service.UserService.*(..))",returning="user")  
 	public void afterReturningAdvice(JoinPoint joinPoint, User user)  
 	{  
 		logger.loggerInfo("After Returing method:"+joinPoint.getSignature());  
 		logger.logger(user);  
-	}  
+	} 
 }

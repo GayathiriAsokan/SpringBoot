@@ -30,7 +30,7 @@ import com.example.demo.Service.UserService;
 
 
 /**
- * UserController is used to do the crud operations 
+ * UserController is used to do the crud operations by invoking service 
  * @author ubuntu
  *
  */
@@ -40,9 +40,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService; 
-	
-	@Autowired
-	private UserErrorResponse error;
 	
 	@Autowired
 	LoggerClass logger;
