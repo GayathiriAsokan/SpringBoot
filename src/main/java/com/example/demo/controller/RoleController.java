@@ -24,9 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Logger.LoggerClass;
+import com.example.demo.Model.Role;
 import com.example.demo.Model.User;
 import com.example.demo.Model.UserErrorResponse;
-import com.example.demo.Service.UserService;
+import com.example.demo.Service.RoleService;
 
 
 /**
@@ -35,71 +36,72 @@ import com.example.demo.Service.UserService;
  *
  */
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/roles")
+public class RoleController {
 
 	@Autowired
-	private UserService userService; 
-	
-	@Autowired
+	private RoleService roleService; 
+
+	@Autowired 
 	LoggerClass logger;
-	
+
+
 	/**
-	 * Get the values from user by invoking userService 
+	 * Get the values from user by invoking roleService 
 	 * 
 	 * @return -  used to get all users
 	 */
 	@GetMapping("/get/all")
-	public List<User> getAllUser() {
-		return userService.getAll();
+	public List<Role> getAllUser() {
+		return roleService.getAllRole();
 	}
 
 	/**
-	 * Add  a values by invoking userService 
+	 * Add  a values by invoking roleService 
 	 * 
 	 * @param user - which is going to save
 	 * @return - used to saved user
 	 */
 	@PostMapping("/add") 
-	private String create(@RequestBody User user) { 
-		return userService.insertUser(user); 
+	private String create(@RequestBody Role role) { 
+		return roleService.insertRole(role); 
 	}
 
 	/**
-	 * Update the values by invoking userService 
+	 * Update the values by invoking roleService 
 	 * 
 	 * @param user  which is going to update
 	 * @return - which is updated
 	 */
 	@PutMapping("/edit") 
-	private String edit(@RequestBody User user) { 
-		return userService.updateUser(user); 
-	}
-
-    /**
-     * Delete the values using id by invoking userService 
-     * 
-     * @param id - which is going to delete
-     * @return - which is deleted
-     */
-	@DeleteMapping("/delete/{userId}")
-	private void deleteById(@PathVariable ("userId") String id) {
-		userService.deleteUser(id);
+	private String edit(@RequestBody Role role) { 
+		return roleService.updateRole(role); 
 	}
 
 	/**
-	 * Get the value of user by id by invoking userService 
+	 * Delete the values using id by invoking roleService 
+	 * 
+	 * @param id - which is going to delete
+	 * @return - which is deleted
+	 */
+	@DeleteMapping("/delete/{roleId}")
+	private void deleteById(@PathVariable ("roleId") int id) {
+		roleService.deleteRole(id);
+	}
+
+	/**
+	 * Get the value of user by id by invoking roleService 
 	 * 
 	 * @param id - which is going to delete by id
 	 * @return - which is deleted by id
 	 */
-	@GetMapping("/{userId}")
-	private  User getById(@PathVariable ("userId") String id) {
-		String string = Character.toString(id.charAt(5)); 
-		if (userService.count() < Integer.parseInt(string)) {
+	@GetMapping("/{roleId}")
+	private  Role getById(@PathVariable ("roleId") int id) {
+		if (roleService.count() < id) {
 			logger.loggerError(Constants.ERROR_MESSAGE);
 			throw new CustomException(Constants.ERROR_MESSAGE + "  " +  id);
 		}
-		return userService.getById(id);
+		return roleService.getRole(id);
 	}
 }
+

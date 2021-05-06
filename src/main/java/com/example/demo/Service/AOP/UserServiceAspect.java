@@ -24,11 +24,12 @@ public class UserServiceAspect {
 
 	@Autowired
 	LoggerClass logger;
+	
 	/**
 	 * 
 	 * @param joinPoint
 	 * @param user
-	 *
+	 */
 	@Before(value = "execution(* com.example.demo.Service.UserService.*(..)) and args(user)")
 	public void  beforeAdvice(JoinPoint joinPoint, User user) {
 		logger.loggerInfo("Before method:" + joinPoint.getSignature());
@@ -37,7 +38,7 @@ public class UserServiceAspect {
 	
 	/**
 	 * Displays all the available methods i.e. the advice will be called for all the methods
-	 */
+	 *
 	@Pointcut(value= "execution(* com.example.demo.Service.UserService.*(..))")  
 	private void logUserService()   
 	{   
@@ -47,7 +48,7 @@ public class UserServiceAspect {
 	 * Declares the around advice that is applied before and after the method matching with a pointcut expression
 	 * @param joinPoint
 	 * @throws Throwable
-	 */
+	 *
 	@Around(value= "logUserService()")  
 	public void aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable   
 	{  
@@ -67,11 +68,11 @@ public class UserServiceAspect {
 	 * Implementing after returning advice     
 	 * @param joinPoint
 	 * @param account
-	  */
+	  *
 	@AfterReturning(value="execution(* com.example.demo.Service.UserService.*(..))",returning="user")  
 	public void afterReturningAdvice(JoinPoint joinPoint, User user)  
 	{  
 		logger.loggerInfo("After Returing method:"+joinPoint.getSignature());  
 		logger.logger(user);  
-	} 
+	} 	  */
 }

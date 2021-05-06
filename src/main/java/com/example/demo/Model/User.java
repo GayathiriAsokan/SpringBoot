@@ -1,9 +1,22 @@
 package com.example.demo.Model;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@interface Address {
+	
+}
+
 
 @Entity
 @Table(name="user")
@@ -18,6 +31,10 @@ public class User {
 	
 	@Column(name="experience")
 	private int experience;
+
+
+	private Set<Role> role;
+	
 
 	public User() {
 	}

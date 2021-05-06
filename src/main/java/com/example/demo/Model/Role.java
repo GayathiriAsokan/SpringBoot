@@ -1,4 +1,4 @@
-package com.ideas2it.Employee.Application.model;
+package com.example.demo.Model;
 
 import java.util.List;
 
@@ -27,11 +27,12 @@ public class Role {
 	@Column(name="role_name")
 	private String  roleName;	
 	
-	@Column(name="employee_id")
-	private int employeeId;
+	@Column(name="role_status")
+	private String roleStatus;
 	
-	@ManyToMany( mappedBy = "roles") 
-	private List<Employee> employee;
+	/*
+	 * @ManyToMany( mappedBy = "roles") private List<User> user;
+	 */
 	
 	/**
 	 * Default Constructor
@@ -46,17 +47,17 @@ public class Role {
 	 * @param roleName
 	 * @param employeeId
 	 */
-	public Role( String roleName, int employeeId) {
+	public Role( String roleName, String roleStatus) {
 		this.roleName = roleName;
-		this.employeeId = employeeId;
+		this.roleStatus = roleStatus;
 	}
 
-	public int getEmployeeId() {
-		return employeeId;
+	public String getRoleStatus() {
+		return roleStatus;
 	}
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setgetRoleStatus(String roleStatus) {
+		this.roleStatus = roleStatus;
 	}
 
 	public int getRoleId() {
@@ -74,6 +75,6 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", employeeId=" + employeeId + "]";
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleStatus=" + roleStatus + "]";
 	}
 }

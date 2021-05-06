@@ -3,12 +3,16 @@
  */
 package com.example.demo;
 
+import java.lang.annotation.Annotation;
+
+import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.example.demo.Logger.LoggerClass;
+import com.example.demo.Model.User;
 
 
 /**
@@ -27,6 +31,10 @@ public class DemoApplication {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
+		User user = new User();
+		Class c = user.getClass();
+		Annotation annotation = c.getAnnotation(Address.class);
+		System.out.println(annotation);
 	}	 
 
 }

@@ -1,4 +1,4 @@
-package com.ideas2it.Employee.Application.service.Impl;
+package com.example.demo.Service.Impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,17 +7,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ideas2it.Employee.Application.model.Employee;
-import com.ideas2it.Employee.Application.model.Role;
-import com.ideas2it.Employee.Application.repository.EmployeeRepository;
-import com.ideas2it.Employee.Application.repository.RoleRepository;
-import com.ideas2it.Employee.Application.service.RoleService;
+import com.example.demo.Constants.Constants;
+import com.example.demo.Model.Role;
+import com.example.demo.Service.RoleService;
+import com.example.demo.Repository.RoleRepository;
 
 @Service
 public class RoleServiceImpl implements RoleService{
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
 	@Autowired
 	private RoleRepository  roleRepository;
 
@@ -25,56 +22,54 @@ public class RoleServiceImpl implements RoleService{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String insertRole(int employeeId, String roleName) {
-		if(isEmployeeById(employeeId)) {
-			Role role = new Role(roleName, employeeId);
+	public String insertRole(Role role) {
 			roleRepository.save(role);
-			return "INSERTED SUCCESSFULLY";
-		} else {
-			return "EmployeeId NOT EXIST";
-		}
+			return  Constants.INSERT_MESSAGE;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String updateRole(int employeeId, int roleId) {
-		if(isEmployeeById(employeeId)) {
-			Optional<Role> employees = this.roleRepository.findById(roleId);
-			Role role = employees.get();
-			role.setEmployeeId(employeeId);
+	public String updateRole(Role role) {
 			roleRepository.save(role);
-			return "UPDATED SUCCESSFULY";
-		} else {
-			return "EmployeeId NOT EXIST";
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public boolean isEmployeeById(int employeeId) {
-		if (employeeRepository.existsById(employeeId)) {
-			return true;
-		} else {
-			return false;
-		}
+			return Constants.UPDATE_MESSAGE;
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Role getRole(int employeeId) {
-		Optional<Role> role = this.roleRepository.findById(employeeId);
+	public String deleteRole(int roleId) {
+		roleRepository.deleteById(roleId);
+		return Constants.DELETE_MESSAGE;
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Role getRole(int roleId) {
+		Optional<Role> role = this.roleRepository.findById(roleId);
 		return role.get(); 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List <Role> getAllRole() {
 		List <Role> roles = new ArrayList<Role> ();
 		 roleRepository.findAll().forEach(roles :: add);
 		 return roles;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int count() {
+		return (int) roleRepository.count();
 	}
 }

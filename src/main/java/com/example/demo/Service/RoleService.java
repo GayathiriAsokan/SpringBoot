@@ -1,13 +1,14 @@
 /**
  * 
  */
-package com.ideas2it.Employee.Application.service;
+package com.example.demo.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.ideas2it.Employee.Application.model.Employee;
-import com.ideas2it.Employee.Application.model.Role;
+import com.example.demo.Model.Role;
+
+
 
 /**
  * @author ubuntu
@@ -17,26 +18,31 @@ public interface RoleService {
     
 	/**
 	 * Insert a role for role
-	 * @param roleId
-	 * @param roleName
+	 * @param role
 	 * @return
 	 */
-	public String insertRole(int employeeId, String roleName);
+	public String insertRole(Role role);
+	
+	/**
+	 * Delete the roles
+	 * @param roleId
+	 * @return
+	 */
+	public String deleteRole(int roleId);
 	
 	/**
 	 * Update a role for role
-	 * @param employeeId
-	 * @param projectId
+	 * @param role
 	 * @return
 	 */
-	public String updateRole(int employeeId, int projectId);
+	public String updateRole(Role role);
 	
 	/**
 	 * Get the values from role
-	 * @param employeeId
+	 * @param roleId
 	 * @return
 	 */
-	public Role getRole(int employeeId);
+	public Role getRole(int roleId);
 	
 	/**
 	 *  Get all roles
@@ -44,4 +50,9 @@ public interface RoleService {
 	 */
 	public List <Role>  getAllRole();
 	
+	/**
+	 * get count of roles
+	 * @return
+	 */
+	public int count();
 }

@@ -8,14 +8,14 @@ package com.example.demo.Exception;
  * @author GAYATHIRI
  * @return String
  */
-public class UserNotExist extends RuntimeException{
+public class CustomException extends RuntimeException{
 	private String message;
 	
 	/**
 	 * Asigning values using this keyword    
 	 * @param message
 	 */
-	public UserNotExist(String message) {
+	public CustomException(String message) {
 		super(message);
 	}
 }
