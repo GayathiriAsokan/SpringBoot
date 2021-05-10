@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.example.demo.Model.User;
 /**
  * Role is  uesd to create  a role  for Employee
  * @author ubuntu
@@ -23,22 +24,22 @@ public class Role {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="role_id")
 	private int roleId ;
-	
+
 	@Column(name="role_name")
 	private String  roleName;	
-	
+
 	@Column(name="role_status")
 	private String roleStatus;
-	
-	/*
-	 * @ManyToMany( mappedBy = "roles") private List<User> user;
-	 */
-	
+
+	@ManyToMany( mappedBy = "roles")
+	private List<User> user;
+
+
 	/**
 	 * Default Constructor
 	 */
 	public Role() {
-		
+
 	}
 
 	/**

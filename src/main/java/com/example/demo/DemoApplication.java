@@ -11,8 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import com.example.demo.Logger.LoggerClass;
 import com.example.demo.Model.User;
+
 
 
 /**
@@ -24,17 +24,18 @@ import com.example.demo.Model.User;
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass=true)  
 public class DemoApplication {
-	
+	  
 	/**
 	 * Main is used to start the application
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		User user = new User();
-		Class c = user.getClass();
-		Annotation annotation = c.getAnnotation(Address.class);
-		System.out.println(annotation);
+		  User user = new User(); 
+		  Class c = user.getClass(); 
+		  Annotation annotation = c.getAnnotation(Address.class); 
+		  System.out.println(annotation);
+		 
 	}	 
 
 }
