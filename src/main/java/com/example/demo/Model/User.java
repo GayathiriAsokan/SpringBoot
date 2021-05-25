@@ -1,18 +1,16 @@
 package com.example.demo.Model;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
+import javax.persistence.JoinColumn;
 /*@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @interface Address {
@@ -33,9 +31,12 @@ public class User {
 	@Column(name="experience")
 	private int experience;
 
-	@ManyToMany
-	@JoinTable( name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
-	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "user_role", 
+        joinColumns = { @JoinColumn(name = "user_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    )
 	private  Set<Role> role;
 	
 	public User() {
@@ -50,6 +51,14 @@ public class User {
 
 	public String getUserId() {
 		return userId;
+	}
+
+	public Set<Role> getRole() {
+		return role;
+	}
+
+	public void setRole(Set<Role> role) {
+		this.role = role;
 	}
 
 	public void setUserId(String userId) {
@@ -74,7 +83,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", designation=" + designation + ", experience=" + experience + "]";
+		return "User [userId=" + userId + ", designation=" + designation + ", experience=" + experience + ", role="
+				+ role + "]";
 	}
 
 

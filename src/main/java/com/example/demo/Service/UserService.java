@@ -4,7 +4,9 @@
 package com.example.demo.Service;
 
 import java.util.List;
+import java.util.Set;
 
+import com.example.demo.Model.Role;
 import com.example.demo.Model.User;
 
 /**
@@ -50,4 +52,11 @@ public interface UserService {
 	 * Get the count values of user
 	 */
 	public int count();
+	
+	/**
+	 * Add roles to users 
+	 * @param user
+	 * @return
+	 */
+	public String userRoles(User user);  
 }

@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.example.demo.Model.User;
-
-
 
 /**
  * DemoApplication is used for main application 
@@ -21,21 +21,20 @@ import com.example.demo.Model.User;
  * @author ubuntu
  *
  */
-@SpringBootApplication
-@EnableAspectJAutoProxy(proxyTargetClass=true)  
+@SpringBootApplication 
 public class DemoApplication {
-	  
+	private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+	
 	/**
 	 * Main is used to start the application
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		  User user = new User(); 
-		  Class c = user.getClass(); 
-		  Annotation annotation = c.getAnnotation(Address.class); 
-		  System.out.println(annotation);
-		 
+		logger.warn("Spring Boot started");
+		/*
+		 * User user = new User(); Class c = user.getClass(); Annotation annotation =
+		 * c.getAnnotation(Address.class); System.out.println(annotation);
+		 */
 	}	 
-
 }

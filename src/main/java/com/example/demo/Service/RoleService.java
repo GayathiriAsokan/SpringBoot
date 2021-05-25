@@ -55,4 +55,11 @@ public interface RoleService {
 	 * @return
 	 */
 	public int count();
+
+	/**
+	 * Add users to roles
+	 * @param role
+	 * @return
+	 */
+	public String userRoles(Role role);
 }

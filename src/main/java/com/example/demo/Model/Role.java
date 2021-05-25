@@ -1,9 +1,12 @@
 package com.example.demo.Model;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
@@ -30,9 +33,9 @@ public class Role {
 
 	@Column(name="role_status")
 	private String roleStatus;
-
-	@ManyToMany( mappedBy = "roles")
-	private List<User> user;
+    
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL },mappedBy = "role")
+	private Set<User> user;
 
 
 	/**
@@ -72,6 +75,18 @@ public class Role {
 	}
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public Set<User> getUser() {
+		return user;
+	}
+
+	public void setUser(Set<User> user) {
+		this.user = user;
+	}
+
+	public void setRoleStatus(String roleStatus) {
+		this.roleStatus = roleStatus;
 	}
 
 	@Override

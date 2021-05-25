@@ -7,14 +7,17 @@
  */
 package com.example.demo.Service.Impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Constants.Constants;
 import com.example.demo.Logger.LoggerClass;
+import com.example.demo.Model.Role;
 import com.example.demo.Model.User;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.UserService;
@@ -29,10 +32,10 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	LoggerClass logger;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -80,12 +83,21 @@ public class UserServiceImpl implements UserService{
 		Optional<User> user = this.userRepository.findById(userId);
 		return user.get();  
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public int count() {
 		return (int) userRepository.count();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String userRoles(User user) {
+		userRepository.save(user);
+		return "Inserted Success";
 	}
 }

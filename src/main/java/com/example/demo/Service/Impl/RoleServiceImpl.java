@@ -72,4 +72,13 @@ public class RoleServiceImpl implements RoleService{
 	public int count() {
 		return (int) roleRepository.count();
 	}
+   
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String userRoles(Role role) {
+	   roleRepository.save(role);
+		return "Inserted success";
+	}
 }

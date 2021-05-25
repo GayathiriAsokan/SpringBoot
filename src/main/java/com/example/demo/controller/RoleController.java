@@ -45,7 +45,6 @@ public class RoleController {
 	@Autowired 
 	LoggerClass logger;
 
-
 	/**
 	 * Get the values from user by invoking roleService 
 	 * 
@@ -103,5 +102,16 @@ public class RoleController {
 		}
 		return roleService.getRole(id);
 	}
+
+	/**
+	 * Add users to roles
+	 * @param role
+	 * @return
+	 */
+	@PostMapping("/add/userRole") 
+	private String userRole(@RequestBody Role role) {
+		System.out.println(role);
+		return roleService.userRoles(role);
+	}	
 }
 

@@ -5,6 +5,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.xml.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Logger.LoggerClass;
+import com.example.demo.Model.Role;
 import com.example.demo.Model.User;
 import com.example.demo.Model.UserErrorResponse;
 import com.example.demo.Service.UserService;
@@ -102,4 +104,15 @@ public class UserController {
 		}
 		return userService.getById(id);
 	}
+	
+	/**
+	 * Add roles to users
+	 * @param user
+	 * @return
+	 */
+	@PostMapping("/add/userRole") 
+	private String userRole(@RequestBody User user) {
+		System.out.println(user);
+		return userService.userRoles(user);
+	}	
 }
