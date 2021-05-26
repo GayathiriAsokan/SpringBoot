@@ -7,6 +7,7 @@
  */
 package com.example.demo.Service.Impl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> getAll() {
 		logger.loggerInfo("Method to view");
-		return userRepository.findAll();
+		List <User> user = new ArrayList(userRepository.findAll());
+		System.out.println(user);
+		return user;
 	}
 
 	/**
