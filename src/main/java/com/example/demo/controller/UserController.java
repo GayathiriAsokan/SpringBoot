@@ -45,7 +45,7 @@ public class UserController {
 	
 	@Autowired
 	LoggerClass logger;
-	
+
 	/**
 	 * Get the values from user by invoking userService 
 	 * 

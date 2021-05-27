@@ -31,7 +31,6 @@ import com.example.demo.Model.User;
 @EnableAspectJAutoProxy(proxyTargetClass=true)  
 @EnableSwagger2
 public class DemoApplication {
-	private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 	
 	/**
 	 * Main is used to start the application
@@ -39,7 +38,6 @@ public class DemoApplication {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		logger.warn("Spring Boot started");
 	}	
 	
 	@Bean
