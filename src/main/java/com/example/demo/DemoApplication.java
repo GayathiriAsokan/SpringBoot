@@ -28,7 +28,7 @@ import com.example.demo.Model.User;
  *
  */
 @SpringBootApplication 
-@EnableAspectJAutoProxy(proxyTargetClass=true)  
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 @EnableSwagger2
 public class DemoApplication {
 	

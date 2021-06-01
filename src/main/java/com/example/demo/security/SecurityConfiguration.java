@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
-	/**
+	/**avaru meeting la upd
 	 * SecurityBuilder  used to create an AuthenticationManager
 	 *  Allows for easily building in memory authentication
 	 */
