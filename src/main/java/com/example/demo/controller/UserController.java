@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.xml.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -46,6 +47,9 @@ public class UserController {
 	@Autowired
 	LoggerClass logger;
 
+	@Value("${mymessage: default value}")
+	private String message;
+	
 	/**
 	 * Get the values from user by invoking userService 
 	 * 
@@ -65,7 +69,7 @@ public class UserController {
 	 */
 	@PostMapping("/add") 
 	private String create(@RequestBody User user) { 
-		return userService.insertUser(user); 
+		return userService.insertUser(user) + message; 
 	}
 
 	/**

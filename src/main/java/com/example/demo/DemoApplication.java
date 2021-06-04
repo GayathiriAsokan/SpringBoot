@@ -9,6 +9,7 @@ import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ import com.example.demo.Model.User;
  *
  */
 @SpringBootApplication 
-@EnableAspectJAutoProxy(proxyTargetClass=true)
+@EnableConfigServer
 @EnableSwagger2
 public class DemoApplication {
 	
