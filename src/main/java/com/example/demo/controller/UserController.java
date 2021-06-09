@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.xml.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -43,13 +44,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService; 
-	
+
 	@Autowired
 	LoggerClass logger;
 
-	@Value("${mymessage: default value}")
-	private String message;
-	
+
 	/**
 	 * Get the values from user by invoking userService 
 	 * 
@@ -61,6 +60,12 @@ public class UserController {
 		return userService.getAll();
 	}
 
+	/*
+	 * @GetMapping("/gg") public String g () { return message;
+	 * 
+	 * }
+	 */
+
 	/**
 	 * Add  a values by invoking userService 
 	 * 
@@ -69,7 +74,7 @@ public class UserController {
 	 */
 	@PostMapping("/add") 
 	private String create(@RequestBody User user) { 
-		return userService.insertUser(user) + message; 
+		return userService.insertUser(user); 
 	}
 
 	/**
@@ -83,12 +88,12 @@ public class UserController {
 		return userService.updateUser(user); 
 	}
 
-    /**
-     * Delete the values using id by invoking userService 
-     * 
-     * @param id - which is going to delete
-     * @return - which is deleted
-     */
+	/**
+	 * Delete the values using id by invoking userService 
+	 * 
+	 * @param id - which is going to delete
+	 * @return - which is deleted
+	 */
 	@DeleteMapping("/delete/{userId}")
 	private void deleteById(@PathVariable ("userId") String id) {
 		userService.deleteUser(id);
@@ -109,7 +114,7 @@ public class UserController {
 		}
 		return userService.getById(id);
 	}
-	
+
 	/**
 	 * Add roles to users
 	 * @param user
