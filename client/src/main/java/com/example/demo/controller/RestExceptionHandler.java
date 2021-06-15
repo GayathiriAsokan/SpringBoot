@@ -1,31 +1,39 @@
 package com.example.demo.controller;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.demo.Exception.CustomException;
-import com.example.demo.Model.UserErrorResponse;
+import com.example.demo.Model.ErrorResponse;
 
-@ControllerAdvice
-public class UserRestExceptionHandler {
+/**
+ * To handle exceptions across the whole application in global handling component
+ * @author GAYATHIRI
+ *
+ */
+@RestControllerAdvice
+public class RestExceptionHandler {
 
 	@Autowired
-	private UserErrorResponse error;
+	private ErrorResponse error;
 	
 	/**
-	 * It is used to handle the runtime exception and send to response entity
+	 * It is used to handle the runtime exception and send it to response entity
 	 * @param exception
 	 * @return Http response for objects
 	 */
 	@ExceptionHandler
-	public ResponseEntity<UserErrorResponse> handleException(Exception exception) {
-		error.setStatus(HttpStatus.NOT_FOUND.value());
+	public ResponseEntity <ErrorResponse> handleException(SQLException exception) {
+		error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		error.setMessage(exception.getMessage());
 		error.setTimeStamp(System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND) ;
+		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR) ;
 	}
 	
 	/**
@@ -34,10 +42,10 @@ public class UserRestExceptionHandler {
 	 * @return Http response for objects
 	 */
 	@ExceptionHandler
-	public ResponseEntity<UserErrorResponse> useIdExsit(CustomException exception) {
-		error.setStatus(HttpStatus.NOT_FOUND.value());
+	public ResponseEntity<ErrorResponse> useIdExsit(CustomException exception) {
+		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		error.setMessage(exception.getMessage());
 		error.setTimeStamp(System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND) ;
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST) ;
 	}
 }

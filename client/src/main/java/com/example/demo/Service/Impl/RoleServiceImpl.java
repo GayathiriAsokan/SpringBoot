@@ -1,8 +1,11 @@
 package com.example.demo.Service.Impl;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,24 +21,27 @@ public class RoleServiceImpl implements RoleService{
 	@Autowired
 	private RoleRepository  roleRepository;
 
+	@Autowired
+	private EntityManager entityManager;
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String insertRole(Role role) {
-			roleRepository.save(role);
-			return  Constants.INSERT_MESSAGE;
+	public Role insertRole(Role role) {
+		return roleRepository.save(role);
+		//return  Constants.INSERT_MESSAGE;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String updateRole(Role role) {
-			roleRepository.save(role);
-			return Constants.UPDATE_MESSAGE;
+	public Role updateRole(Role role) {
+		return roleRepository.save(role);
+		//return Constants.UPDATE_MESSAGE;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -61,24 +67,34 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public List <Role> getAllRole() {
 		List <Role> roles = new ArrayList<Role> ();
-		 roleRepository.findAll().forEach(roles :: add);
-		 return roles;
+		roleRepository.findAll().forEach(roles :: add);
+		return roles;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int count() {
-		return (int) roleRepository.count();
+	public Long count(int roleId) {
+		Long id = 0l;
+		try {
+			id = roleRepository.countUser(roleId);
+			if (null != id &&  id != 0) {
+				return  id;
+			}
+		}  catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return  id;
 	}
-   
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String userRoles(Role role) {
-	   roleRepository.save(role);
-		return "Inserted success";
+	public Role userRoles(Role role) {
+		return roleRepository.save(role);
+		//return "Inserted success";
 	}
 }

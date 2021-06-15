@@ -2,6 +2,7 @@ package com.example.demo.Model;
 
 import java.util.Set;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +12,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
-/*@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@interface Address {
 
-}*/
-
+/**
+ * Users is  used to create  a role  for roles 
+ * @author GAYATHIRI
+ *
+ */
 @Entity
 @Table(name="user")
 public class User {

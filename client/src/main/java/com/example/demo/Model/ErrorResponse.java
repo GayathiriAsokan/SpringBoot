@@ -10,22 +10,22 @@ import org.springframework.stereotype.Component;
 
 /**
  * UserErrorResponse is used to get response from restService 
- * @author ubuntu
+ * @author GAYATHIRI
  *
  */
 @Component
 @ConfigurationProperties
-public class UserErrorResponse {
+public class ErrorResponse {
 	
 	private int status;
 	private String message;
 	private long timeStamp;
 	
-	public UserErrorResponse() {
+	public ErrorResponse() {
 		
 	}
 	
-	public UserErrorResponse(int status, String message, long timeStamp) {
+	public ErrorResponse(int status, String message, long timeStamp) {
 		super();
 		this.status = status;
 		this.message = message;

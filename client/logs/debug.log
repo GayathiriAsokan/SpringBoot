@@ -1,0 +1,6 @@
+2021-06-15 21:49:36,101 ERROR RoleController:103 - [] USER ID NOT EXIST
+2021-06-15 23:27:37,798 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-15 23:27:46,564 INFO  StartupInfoLogger:61 - [] Started DemoApplication in 10.684 seconds (JVM running for 11.48)
+2021-06-15 23:29:35,824 INFO  UserServiceAspect:37 - [] Before method:User com.example.demo.Service.Impl.UserServiceImpl.insertUser(User)
+2021-06-15 23:29:35,826 INFO  UserServiceAspect:38 - [] Creating User with userId - User [userId=user_3, designation=sse, experience=2, role=null]
+2021-06-15 23:29:35,835 INFO  UserServiceImpl:67 - [] Method to insert

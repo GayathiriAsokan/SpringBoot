@@ -7,11 +7,13 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.Logger.LoggerClass;
 import com.example.demo.Model.User;
+import com.example.demo.controller.UserController;
 
 /**
  * Adding some additional behaviour in existing code without modify the code itself
@@ -19,11 +21,10 @@ import com.example.demo.Model.User;
  *
  */
 @Aspect  
-@Component  
+@Component
 public class UserServiceAspect {
-
-	@Autowired
-	LoggerClass logger;
+	
+	Logger log = LoggerFactory.getLogger(UserServiceAspect.class); 
 	
 	/**
 	 * 
@@ -32,8 +33,9 @@ public class UserServiceAspect {
 	 */
 	@Before(value = "execution(* com.example.demo.Service.UserService.*(..)) and args(user)")
 	public void  beforeAdvice(JoinPoint joinPoint, User user) {
-		logger.loggerInfo("Before method:" + joinPoint.getSignature());
-		logger.loggerInfo("Creating User with userId - " + user);  
+		/* log.info("gfhgfj"); */
+		log.info("Before method:" + joinPoint.getSignature());
+		log.info("Creating User with userId - " + user);  
 	}
 	
 	/**

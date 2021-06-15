@@ -3,10 +3,14 @@
  */
 package com.example.demo.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
 import javax.xml.validation.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
@@ -24,27 +28,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
-import com.example.demo.Logger.LoggerClass;
 import com.example.demo.Model.Role;
 import com.example.demo.Model.User;
-import com.example.demo.Model.UserErrorResponse;
+import com.example.demo.Model.ErrorResponse;
 import com.example.demo.Service.RoleService;
 
 
 /**
  * UserController is used to do the crud operations by invoking service 
- * @author ubuntu
+ * @author GAYATHIRI
  *
  */
 @RestController
 @RequestMapping("/roles")
 public class RoleController {
 
+	Logger log = LoggerFactory.getLogger(RoleController.class);	
+	
 	@Autowired
 	private RoleService roleService; 
-
-	@Autowired 
-	LoggerClass logger;
 
 	/**
 	 * Get the values from user by invoking roleService 
@@ -63,7 +65,7 @@ public class RoleController {
 	 * @return - used to saved user
 	 */
 	@PostMapping("/add") 
-	private String create(@RequestBody Role role) { 
+	private Role create(@RequestBody Role role) { 
 		return roleService.insertRole(role); 
 	}
 
@@ -74,7 +76,7 @@ public class RoleController {
 	 * @return - which is updated
 	 */
 	@PutMapping("/edit") 
-	private String edit(@RequestBody Role role) { 
+	private Role edit(@RequestBody Role role) { 
 		return roleService.updateRole(role); 
 	}
 
@@ -92,13 +94,13 @@ public class RoleController {
 	/**
 	 * Get the value of user by id by invoking roleService 
 	 * 
-	 * @param id - which is going to delete by id
-	 * @return - which is deleted by id
+	 * @param id - which is to get by id
+	 * @return - which is get by id
 	 */
 	@GetMapping("/{roleId}")
 	private  Role getById(@PathVariable ("roleId") int id) {
-		if (roleService.count() < id) {
-			logger.loggerError(Constants.ERROR_MESSAGE);
+		if (roleService.count(id) != 1) {
+			log.error(Constants.ERROR_MESSAGE);
 			throw new CustomException(Constants.ERROR_MESSAGE + "  " +  id);
 		}
 		return roleService.getRole(id);
@@ -110,7 +112,7 @@ public class RoleController {
 	 * @return
 	 */
 	@PostMapping("/add/userRole") 
-	private String userRole(@RequestBody Role role) {
+	private Role userRole(@RequestBody Role role) {
 		System.out.println(role);
 		return roleService.userRoles(role);
 	}	

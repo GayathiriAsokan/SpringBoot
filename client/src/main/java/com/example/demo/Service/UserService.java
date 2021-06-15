@@ -3,6 +3,7 @@
  */
 package com.example.demo.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
@@ -25,14 +26,14 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	public String insertUser(User user);
+	public User insertUser(User user);
 
 	/**
 	 * Updating the values of user
 	 * @param user
 	 * @return
 	 */
-	public String updateUser(User user);
+	public User updateUser(User user);
 
 	/**
 	 * Delete the user by id
@@ -51,7 +52,7 @@ public interface UserService {
 	/**
 	 * Get the count values of user
 	 */
-	public int count();
+	public Long count(String userId);
 	
 	/**
 	 * Add roles to users 

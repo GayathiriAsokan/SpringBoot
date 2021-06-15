@@ -12,14 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * SecurityConfiguration  is used for authentication
- * @author ubuntu
+ * @author GAYATHIRI
  *
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
-	/**avaru meeting la upd
+	/**
 	 * SecurityBuilder  used to create an AuthenticationManager
 	 *  Allows for easily building in memory authentication
 	 */
@@ -32,6 +32,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.password("root")
 		.roles("USER");
 	}
+
+	   @Override
+	    protected void configure(HttpSecurity http) throws Exception{
+	        http.cors().and().csrf().disable();
+	    }
 
 	/**
 	 * PasswordEncoder is defined in the Spring Security configuration to encode the password

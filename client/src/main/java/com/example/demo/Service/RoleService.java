@@ -3,15 +3,15 @@
  */
 package com.example.demo.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.Model.Role;
 
-
-
 /**
- * @author ubuntu
+ * Necessary to create role service for roles
+ * @author GAYATHIRI
  *
  */
 public interface RoleService {
@@ -21,7 +21,7 @@ public interface RoleService {
 	 * @param role
 	 * @return
 	 */
-	public String insertRole(Role role);
+	public Role insertRole(Role role);
 	
 	/**
 	 * Delete the roles
@@ -35,7 +35,7 @@ public interface RoleService {
 	 * @param role
 	 * @return
 	 */
-	public String updateRole(Role role);
+	public Role updateRole(Role role);
 	
 	/**
 	 * Get the values from role
@@ -54,12 +54,12 @@ public interface RoleService {
 	 * get count of roles
 	 * @return
 	 */
-	public int count();
+	public Long count(int roleId);
 
 	/**
 	 * Add users to roles
 	 * @param role
 	 * @return
 	 */
-	public String userRoles(Role role);
+	public Role userRoles(Role role);
 }

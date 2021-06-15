@@ -3,6 +3,7 @@
  */
 package com.example.demo.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,30 +24,30 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
-import com.example.demo.Logger.LoggerClass;
 import com.example.demo.Model.Role;
 import com.example.demo.Model.User;
-import com.example.demo.Model.UserErrorResponse;
+import com.example.demo.Model.ErrorResponse;
 import com.example.demo.Service.UserService;
 
 
 /**
  * UserController is used to do the crud operations by invoking service 
- * @author ubuntu
+ * @author GAYATHIRI
  *
  */
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+	Logger log = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	private UserService userService; 
-
-	@Autowired
-	LoggerClass logger;
    
 	@Value("${message: Default springboot hii}")
     private String message;
@@ -58,17 +59,18 @@ public class UserController {
 	 */
 	@GetMapping("/get/all")
 	public List<User> getAllUser() {
-		System.out.println(userService.getAll());
 		return userService.getAll();
 	}
 
-	
-	  @GetMapping("/gg") 
+	/**
+	 * Get the message from config properties
+	 * @return
+	 */
+	  @GetMapping("/getValues") 
 	  public String g () { 
 		  return message;
 	  
-	  }
-	 
+	  } 
 
 	/**
 	 * Add  a values by invoking userService 
@@ -77,7 +79,7 @@ public class UserController {
 	 * @return - used to saved user
 	 */
 	@PostMapping("/add") 
-	private String create(@RequestBody User user) { 
+	private User create(@RequestBody User user) { 
 		return userService.insertUser(user); 
 	}
 
@@ -88,7 +90,7 @@ public class UserController {
 	 * @return - which is updated
 	 */
 	@PutMapping("/edit") 
-	private String edit(@RequestBody User user) { 
+	private User edit(@RequestBody User user) { 
 		return userService.updateUser(user); 
 	}
 
@@ -106,21 +108,26 @@ public class UserController {
 	/**
 	 * Get the value of user by id by invoking userService 
 	 * 
-	 * @param id - which is going to delete by id
+	 * @param id - which is to delete by id
 	 * @return - which is deleted by id
 	 */
 	@GetMapping("/{userId}")
-	private  User getById(@PathVariable ("userId") String id) {
-		String string = Character.toString(id.charAt(5)); 
-		if (userService.count() < Integer.parseInt(string)) {
-			logger.loggerError(Constants.ERROR_MESSAGE);
-			throw new CustomException(Constants.ERROR_MESSAGE + "  " +  id);
+	private  User getById(@PathVariable ("userId") int idValue) {
+		String id = "user_" + idValue;
+		try {
+			if (userService.count(id) ==  1) {
+				return userService.getById(id);
+			}
+		} catch (CustomException e) {
+			log.error(Constants.ERROR_MESSAGE);
+			throw new CustomException(Constants.ERROR_MESSAGE + "  " +  idValue);
 		}
 		return userService.getById(id);
 	}
 
 	/**
 	 * Add roles to users
+	 * 
 	 * @param user
 	 * @return
 	 */

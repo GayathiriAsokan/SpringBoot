@@ -15,8 +15,8 @@ import javax.persistence.ManyToMany;
 
 import com.example.demo.Model.User;
 /**
- * Role is  uesd to create  a role  for Employee
- * @author ubuntu
+ * Role is  used to create  a role  for users
+ * @author GAYATHIRI
  *
  */
 @Entity
