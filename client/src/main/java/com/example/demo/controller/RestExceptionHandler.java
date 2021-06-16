@@ -1,3 +1,7 @@
+/**
+ * Provide necessary to handle exception globally
+ * @version 1.1
+ */
 package com.example.demo.controller;
 
 import java.sql.SQLException;
@@ -25,17 +29,31 @@ public class RestExceptionHandler {
 	
 	/**
 	 * It is used to handle the runtime exception and send it to response entity
+	 * 
 	 * @param exception
 	 * @return Http response for objects
 	 */
 	@ExceptionHandler
-	public ResponseEntity <ErrorResponse> handleException(SQLException exception) {
+	public ResponseEntity <ErrorResponse> handleException(RuntimeException exception) {
 		error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		error.setMessage(exception.getMessage());
 		error.setTimeStamp(System.currentTimeMillis());
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR) ;
 	}
-	
+	/**
+	 * It is used to handle the file not exception and send it to response entity
+	 * 
+	 * @param exception
+	 * @return Http response for objects
+	 *
+	@ExceptionHandler
+	public ResponseEntity <ErrorResponse> resourceNotFoundException() {
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		error.setMessage(exception.getMessage());
+		error.setTimeStamp(System.currentTimeMillis());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND) ;
+	}
+
 	/**
 	 * It is used to handle the exception and send to response entity
 	 * @param exception

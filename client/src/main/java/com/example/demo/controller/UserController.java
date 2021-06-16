@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.User;
+import com.example.demo.Model.UserDetails;
 import com.example.demo.Model.ErrorResponse;
 import com.example.demo.Service.UserService;
 
@@ -45,32 +47,19 @@ import com.example.demo.Service.UserService;
 public class UserController {
 
 	Logger log = LoggerFactory.getLogger(UserController.class);
-	
+
 	@Autowired
 	private UserService userService; 
-   
-	@Value("${message: Default springboot hii}")
-    private String message;
-	
+
 	/**
 	 * Get the values from user by invoking userService 
 	 * 
 	 * @return -  used to get all users
 	 */
-	@GetMapping("/get/all")
-	public List<User> getAllUser() {
+	@GetMapping("/getallUsers")
+	public List<UserDetails> getAllUser() {
 		return userService.getAll();
 	}
-
-	/**
-	 * Get the message from config properties
-	 * @return
-	 */
-	  @GetMapping("/getValues") 
-	  public String g () { 
-		  return message;
-	  
-	  } 
 
 	/**
 	 * Add  a values by invoking userService 
@@ -78,8 +67,11 @@ public class UserController {
 	 * @param user - which is going to save
 	 * @return - used to saved user
 	 */
-	@PostMapping("/add") 
-	private User create(@RequestBody User user) { 
+	@PostMapping("/addUser") 
+	private UserDetails createUser(@RequestBody UserDetails user) { 
+//		String pwd = user.getPassword();
+//		String encryptPwd = passwordEncoder.encode(pwd);
+//		user.setPassword(encryptPwd);
 		return userService.insertUser(user); 
 	}
 
@@ -89,8 +81,8 @@ public class UserController {
 	 * @param user  which is going to update
 	 * @return - which is updated
 	 */
-	@PutMapping("/edit") 
-	private User edit(@RequestBody User user) { 
+	@PutMapping("/editUser") 
+	private UserDetails editUser(@RequestBody UserDetails user) { 
 		return userService.updateUser(user); 
 	}
 
@@ -100,29 +92,26 @@ public class UserController {
 	 * @param id - which is going to delete
 	 * @return - which is deleted
 	 */
-	@DeleteMapping("/delete/{userId}")
-	private void deleteById(@PathVariable ("userId") String id) {
+	@DeleteMapping("/deleteUser/{userId}")
+	private void deleteUserById(@PathVariable ("userId") String id) {
 		userService.deleteUser(id);
 	}
 
 	/**
 	 * Get the value of user by id by invoking userService 
 	 * 
-	 * @param id - which is to delete by id
-	 * @return - which is deleted by id
+	 * @param id - which is to retrieve by id
+	 * @return - which is retrieve by id
 	 */
-	@GetMapping("/{userId}")
-	private  User getById(@PathVariable ("userId") int idValue) {
+	@GetMapping("getUserById/{userId}")
+	private  UserDetails getUserById(@PathVariable ("userId") int idValue) {
 		String id = "user_" + idValue;
-		try {
-			if (userService.count(id) ==  1) {
-				return userService.getById(id);
-			}
-		} catch (CustomException e) {
+		if (userService.count(id) ==  1) {
+			return userService.getById(id);
+		} else {
 			log.error(Constants.ERROR_MESSAGE);
 			throw new CustomException(Constants.ERROR_MESSAGE + "  " +  idValue);
 		}
-		return userService.getById(id);
 	}
 
 	/**
@@ -131,9 +120,9 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("/add/userRole") 
-	private String userRole(@RequestBody User user) {
+	@PostMapping("/addUser/userRole") 
+	private String userRole(@RequestBody UserDetails user) {
 		System.out.println(user);
 		return userService.userRoles(user);
-	}	
+	}
 }

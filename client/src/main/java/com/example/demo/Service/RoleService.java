@@ -15,41 +15,41 @@ import com.example.demo.Model.Role;
  *
  */
 public interface RoleService {
-    
+
 	/**
 	 * Insert a role for role
 	 * @param role
 	 * @return
 	 */
 	public Role insertRole(Role role);
-	
+
 	/**
 	 * Delete the roles
 	 * @param roleId
 	 * @return
 	 */
 	public String deleteRole(int roleId);
-	
+
 	/**
 	 * Update a role for role
 	 * @param role
 	 * @return
 	 */
 	public Role updateRole(Role role);
-	
+
 	/**
 	 * Get the values from role
 	 * @param roleId
 	 * @return
 	 */
 	public Role getRole(int roleId);
-	
+
 	/**
-	 *  Get all roles
+	 * Get all roles
 	 * @return
 	 */
 	public List <Role>  getAllRole();
-	
+
 	/**
 	 * get count of roles
 	 * @return

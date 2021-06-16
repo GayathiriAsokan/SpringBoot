@@ -1,3 +1,6 @@
+/**
+ * Provide neccessary to create role class to interact with role service 
+ */
 package com.example.demo.Model;
 
 import java.util.List;
@@ -13,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.example.demo.Model.User;
+import com.example.demo.Model.UserDetails;
 /**
  * Role is  used to create  a role  for users
  * @author GAYATHIRI
@@ -33,9 +36,9 @@ public class Role {
 
 	@Column(name="role_status")
 	private String roleStatus;
-    
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL },mappedBy = "role")
-	private Set<User> user;
+	private Set<UserDetails> user;
 
 
 	/**
@@ -56,32 +59,39 @@ public class Role {
 		this.roleStatus = roleStatus;
 	}
 
+	/**
+	 * Getters and setters for Role
+	 */
+
 	public String getRoleStatus() {
 		return roleStatus;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public String getRoleName() {
+		return roleName;
 	}
 
 	public void setgetRoleStatus(String roleStatus) {
 		this.roleStatus = roleStatus;
 	}
 
-	public int getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
-	public String getRoleName() {
-		return roleName;
-	}
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 
-	public Set<User> getUser() {
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+	public Set<UserDetails> getUser() {
 		return user;
 	}
 
-	public void setUser(Set<User> user) {
+	public void setUser(Set<UserDetails> user) {
 		this.user = user;
 	}
 

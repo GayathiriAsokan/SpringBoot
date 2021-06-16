@@ -7,8 +7,9 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
+import com.example.demo.Exception.CustomException;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.User;
+import com.example.demo.Model.UserDetails;
 
 /**
  * Doing the crud operations using repository
@@ -16,24 +17,24 @@ import com.example.demo.Model.User;
 public interface UserService {
 
 	/**
-	 * Get the values 
+	 * Get user values 
 	 * @return
 	 */
-	public List<User> getAll();
+	public List<UserDetails> getAll();
 
 	/**
 	 * Inserting the user values
 	 * @param user
 	 * @return
 	 */
-	public User insertUser(User user);
+	public UserDetails insertUser(UserDetails user);
 
 	/**
 	 * Updating the values of user
 	 * @param user
 	 * @return
 	 */
-	public User updateUser(User user);
+	public UserDetails updateUser(UserDetails user);
 
 	/**
 	 * Delete the user by id
@@ -47,17 +48,20 @@ public interface UserService {
 	 * @param userId
 	 * @return
 	 */
-	public User getById(String userId);
-	
+	public UserDetails getById(String userId);
+
 	/**
 	 * Get the count values of user
+	 * @param userId
+	 * @return
 	 */
 	public Long count(String userId);
-	
+
 	/**
 	 * Add roles to users 
 	 * @param user
 	 * @return
 	 */
-	public String userRoles(User user);  
+	public String userRoles(UserDetails user);
+
 }

@@ -54,7 +54,7 @@
 
 	</appender>
 
-	<logger name="com.example.demo" level="debug"
+	<logger name="com.example.demo.controller" level="debug"
 		additivity="false">
 		<appender-ref ref="FILE-AUDIT" />
 		<appender-ref ref="STDOUT" />

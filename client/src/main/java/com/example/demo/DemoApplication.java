@@ -32,14 +32,14 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}	
-	
+
 	/**
-	 * Swagger used to show the document of api
+	 * Swagger  used to show the document of api
 	 * @return
 	 */
 	@Bean
-	   public Docket productApi() {
-	      return new Docket(DocumentationType.SWAGGER_2).select()
-	         .apis(RequestHandlerSelectors.basePackage("com.example.demo")).build();
-	   }
+	public Docket productApi() {
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("com.example.demo")).build();
+	}
 }

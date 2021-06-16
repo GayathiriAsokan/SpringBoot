@@ -1,3 +1,6 @@
+/**
+ * Provide neccessary to create user class to interact with user service 
+ */
 package com.example.demo.Model;
 
 import java.util.Set;
@@ -20,66 +23,94 @@ import javax.persistence.JoinColumn;
  */
 @Entity
 @Table(name="user")
-public class User {
+public class UserDetails {
 
 	@Id
 	@Column(name="user_id")
 	private String userId;
 
+	@Column(name="user_name")
+	private String username;
+
 	@Column(name="designation")
 	private String designation ;
+
+	@Column(name="password ")
+	private String password ;
 
 	@Column(name="experience")
 	private int experience;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "user_role", 
-        joinColumns = { @JoinColumn(name = "user_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "role_id") }
-    )
+	@JoinTable(
+			name = "user_role", 
+			joinColumns = { @JoinColumn(name = "user_id") }, 
+			inverseJoinColumns = { @JoinColumn(name = "role_id") }
+			)
 	private  Set<Role> role;
-	
-	public User() {
+
+	public UserDetails() {
 	}
 
-	public User(String userId, String designation, int experience) {
+	public UserDetails(String userId, String designation, int experience, String password) {
 		super();
 		this.userId = userId;
 		this.designation = designation;
 		this.experience = experience;
+		this.password = password;
 	}
+
+	/**
+	 * Getters and setters for Role
+	 */
+
 
 	public String getUserId() {
 		return userId;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 	public Set<Role> getRole() {
 		return role;
 	}
 
-	public void setRole(Set<Role> role) {
-		this.role = role;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public String getDesignation() {
 		return designation;
-	}
-
-	public void setDesignation(String designation) {
-		this.designation = designation;
 	}
 
 	public int getExperience() {
 		return experience;
 	}
 
+	public String getUserName() {
+		return username;
+	}
+
+	public void setUserName(String username) {
+		this.username = username;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public void setExperience(int experience) {
 		this.experience = experience;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public void setRole(Set<Role> role) {
+		this.role = role;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override

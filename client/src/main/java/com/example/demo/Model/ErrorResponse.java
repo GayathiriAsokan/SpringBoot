@@ -16,15 +16,15 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties
 public class ErrorResponse {
-	
+
 	private int status;
 	private String message;
 	private long timeStamp;
-	
+
 	public ErrorResponse() {
-		
+
 	}
-	
+
 	public ErrorResponse(int status, String message, long timeStamp) {
 		super();
 		this.status = status;
@@ -32,24 +32,28 @@ public class ErrorResponse {
 		this.timeStamp = timeStamp;
 	}
 
+	/**
+	 * Getters and setters for ErrorResponse
+	 */
+
+	public String getMessage() {
+		return message;
+	}
+
 	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public String getMessage() {
-		return message;
+	public long getTimeStamp() {
+		return timeStamp;
 	}
 
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
-	public long getTimeStamp() {
-		return timeStamp;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public void setTimeStamp(long timeStamp) {

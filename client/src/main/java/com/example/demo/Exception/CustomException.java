@@ -12,7 +12,7 @@ public class CustomException extends RuntimeException{
 	private String message;
 	
 	/**
-	 * Asigning values using this keyword    
+	 * Asigning values using super keyword    
 	 * @param message
 	 */
 	public CustomException(String message) {

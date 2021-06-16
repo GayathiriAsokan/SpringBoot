@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.User;
+import com.example.demo.Model.UserDetails;
 import com.example.demo.Model.ErrorResponse;
 import com.example.demo.Service.RoleService;
 
@@ -53,8 +53,8 @@ public class RoleController {
 	 * 
 	 * @return -  used to get all users
 	 */
-	@GetMapping("/get/all")
-	public List<Role> getAllUser() {
+	@GetMapping("/getallRoles")
+	public List<Role> getallRoles() {
 		return roleService.getAllRole();
 	}
 
@@ -64,8 +64,8 @@ public class RoleController {
 	 * @param user - which is going to save
 	 * @return - used to saved user
 	 */
-	@PostMapping("/add") 
-	private Role create(@RequestBody Role role) { 
+	@PostMapping("/addRoles") 
+	private Role createRoles(@RequestBody Role role) { 
 		return roleService.insertRole(role); 
 	}
 
@@ -75,8 +75,8 @@ public class RoleController {
 	 * @param user  which is going to update
 	 * @return - which is updated
 	 */
-	@PutMapping("/edit") 
-	private Role edit(@RequestBody Role role) { 
+	@PutMapping("/editRoles") 
+	private Role editRoles(@RequestBody Role role) { 
 		return roleService.updateRole(role); 
 	}
 
@@ -86,8 +86,8 @@ public class RoleController {
 	 * @param id - which is going to delete
 	 * @return - which is deleted
 	 */
-	@DeleteMapping("/delete/{roleId}")
-	private void deleteById(@PathVariable ("roleId") int id) {
+	@DeleteMapping("/deleteRoles/{roleId}")
+	private void deleteRolesById(@PathVariable ("roleId") int id) {
 		roleService.deleteRole(id);
 	}
 
@@ -97,8 +97,8 @@ public class RoleController {
 	 * @param id - which is to get by id
 	 * @return - which is get by id
 	 */
-	@GetMapping("/{roleId}")
-	private  Role getById(@PathVariable ("roleId") int id) {
+	@GetMapping("/getRolesById/{roleId}")
+	private  Role getRolesById(@PathVariable ("roleId") int id) {
 		if (roleService.count(id) != 1) {
 			log.error(Constants.ERROR_MESSAGE);
 			throw new CustomException(Constants.ERROR_MESSAGE + "  " +  id);
@@ -108,10 +108,11 @@ public class RoleController {
 
 	/**
 	 * Add users to roles
+	 * 
 	 * @param role
 	 * @return
 	 */
-	@PostMapping("/add/userRole") 
+	@PostMapping("/addRoles/userRole") 
 	private Role userRole(@RequestBody Role role) {
 		System.out.println(role);
 		return roleService.userRoles(role);

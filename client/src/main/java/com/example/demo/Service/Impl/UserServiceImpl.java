@@ -17,42 +17,50 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Constants.Constants;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.User;
+import com.example.demo.Model.UserDetails;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.UserService;
+import com.example.demo.controller.AOP.TrackEntity;
 import com.example.demo.controller.UserController;
-
 
 /**
  * UserServiceImpl is used to do crud operations in service 
- * @author ubuntu
+ * @author GAYATHIRI
  *
  */
-
 @Service
 public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserRepository userRepository;
 
-	private static final org.apache.logging.log4j.Logger log = 
-			org.apache.logging.log4j.LogManager.getLogger(UserController.class);
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<User> getAll() {
+	public List<UserDetails> getAll() {
 		try {
-			log.info("Method to view");
-			List <User> user = new ArrayList(userRepository.findAll());
-			System.out.println(user);
+			List <UserDetails> user = (List<UserDetails>) userRepository.findAll();
 			return user;
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@TrackEntity
+	public UserDetails insertUser(UserDetails user) {
+		try {
+			return userRepository.save(user);
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw e;
 		}
@@ -62,27 +70,11 @@ public class UserServiceImpl implements UserService{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User insertUser(User user) {
+	@TrackEntity
+	public UserDetails updateUser(UserDetails user) {
 		try {
-			log.info("Method to insert");
 			return userRepository.save(user);
-			//return Constants.INSERT_MESSAGE;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public User updateUser(User user) {
-		try {
-			log.info("Method to update");
-			return userRepository.save(user);
-			//return Constants.UPDATE_MESSAGE;
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw e;
 		}
@@ -94,10 +86,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String deleteUser(String userId) {
 		try {	
-			log.info("Method to delete");
 			userRepository.deleteById(userId);
 			return Constants.DELETE_MESSAGE;
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw e;
 		}
@@ -107,11 +98,11 @@ public class UserServiceImpl implements UserService{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User getById(String userId) {
+	public UserDetails getById(String userId) {
 		try {
-			Optional<User> user = userRepository.findById(userId);
+			Optional<UserDetails> user = userRepository.findById(userId);
 			return user.get();  
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw e;
 		}
@@ -128,7 +119,7 @@ public class UserServiceImpl implements UserService{
 			if (null != id &&  id != 0) {
 			return  id;
 			}
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw e;
 		}
@@ -139,12 +130,13 @@ public class UserServiceImpl implements UserService{
 	/**
 	 * {@inheritDoc}
 	 */
+	@TrackEntity
 	@Override
-	public String userRoles(User user) {
+	public String userRoles(UserDetails user) {
 		try {
 			userRepository.save(user);
 			return Constants.INSERT_MESSAGE;
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw e;
 		}

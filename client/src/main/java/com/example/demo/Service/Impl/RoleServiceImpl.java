@@ -1,3 +1,10 @@
+/**
+ * Provide the class necessary to create a service class
+ * To communicate with controller and model classes
+ *
+ * @version 1.1
+ * @since 1.0
+ */
 package com.example.demo.Service.Impl;
 
 import java.math.BigInteger;
@@ -12,25 +19,32 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Constants.Constants;
 import com.example.demo.Model.Role;
+import com.example.demo.Model.UserDetails;
 import com.example.demo.Service.RoleService;
 import com.example.demo.Repository.RoleRepository;
 
+/**
+ * RoleServiceImpl is used to do crud operations in service 
+ * @author GAYATHIRI
+ *
+ */
 @Service
 public class RoleServiceImpl implements RoleService{
 
 	@Autowired
 	private RoleRepository  roleRepository;
 
-	@Autowired
-	private EntityManager entityManager;
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public Role insertRole(Role role) {
-		return roleRepository.save(role);
-		//return  Constants.INSERT_MESSAGE;
+		try {
+			return roleRepository.save(role);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
@@ -38,8 +52,12 @@ public class RoleServiceImpl implements RoleService{
 	 */
 	@Override
 	public Role updateRole(Role role) {
-		return roleRepository.save(role);
-		//return Constants.UPDATE_MESSAGE;
+		try {
+			return roleRepository.save(role);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
@@ -47,8 +65,13 @@ public class RoleServiceImpl implements RoleService{
 	 */
 	@Override
 	public String deleteRole(int roleId) {
-		roleRepository.deleteById(roleId);
-		return Constants.DELETE_MESSAGE;
+		try {
+			roleRepository.deleteById(roleId);
+			return Constants.DELETE_MESSAGE;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 
@@ -57,8 +80,13 @@ public class RoleServiceImpl implements RoleService{
 	 */
 	@Override
 	public Role getRole(int roleId) {
-		Optional<Role> role = this.roleRepository.findById(roleId);
-		return role.get(); 
+		try {
+			Optional<Role> role = roleRepository.findById(roleId);
+			return role.get(); 
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
@@ -66,9 +94,14 @@ public class RoleServiceImpl implements RoleService{
 	 */
 	@Override
 	public List <Role> getAllRole() {
-		List <Role> roles = new ArrayList<Role> ();
-		roleRepository.findAll().forEach(roles :: add);
-		return roles;
+		try {
+			List <Role> roles = new ArrayList<Role> ();
+			roleRepository.findAll().forEach(roles :: add);
+			return roles;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
@@ -78,11 +111,11 @@ public class RoleServiceImpl implements RoleService{
 	public Long count(int roleId) {
 		Long id = 0l;
 		try {
-			id = roleRepository.countUser(roleId);
+			id = roleRepository.countRole(roleId);
 			if (null != id &&  id != 0) {
 				return  id;
 			}
-		}  catch (Exception e) {
+		}  catch (RuntimeException e) {
 			e.printStackTrace();
 			throw e;
 		}
@@ -94,7 +127,11 @@ public class RoleServiceImpl implements RoleService{
 	 */
 	@Override
 	public Role userRoles(Role role) {
-		return roleRepository.save(role);
-		//return "Inserted success";
+		try {
+			return roleRepository.save(role);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }
