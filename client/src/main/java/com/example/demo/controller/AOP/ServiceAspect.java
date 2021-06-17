@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.Model.Role;
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
 
 /**
  * Adding some additional behaviour in existing code without modify the code itself
@@ -33,7 +33,7 @@ public class ServiceAspect {
 	 * @param user
 	 */
 	@Around("@annotation(com.example.demo.controller.AOP.TrackEntity) && (args(user))")
-	public void  aroundAdvice(JoinPoint joinPoint, UserDetails user) {
+	public void  aroundAdvice(JoinPoint joinPoint, User user) {
 		log.info("Before and After method:" + joinPoint.getSignature());
 		log.info("Creating User with userId - " + user); 
 	}

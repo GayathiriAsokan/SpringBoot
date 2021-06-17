@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
 import com.example.demo.Model.ErrorResponse;
 import com.example.demo.Service.RoleService;
 

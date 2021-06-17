@@ -7,15 +7,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import org.springframework.security.core.userdetails.User;
+import com.example.demo.Model.User;
 
 public class UserPrincipal implements UserDetails {
 
 	private User user;
-	
-	public UserPrincipal(User user2) {
+
+
+	public UserPrincipal(User user) {
 		super();
-		this.user = user2;
+		this.user = user;
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 
 }

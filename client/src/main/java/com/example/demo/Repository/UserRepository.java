@@ -1,24 +1,23 @@
 package com.example.demo.Repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.security.core.userdetails.User;
 
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
+
 /**
  * This interface is used to interact with database using jpa repository
  * 
  * @author GAYATHIRI
  *
  */
-public interface UserRepository extends CrudRepository<UserDetails , String>{
+public interface UserRepository extends JpaRepository<User , String>{
 
-	@Query(value="select count(user_id) from user where user.user_id = ?1",  nativeQuery=true) 
+	@Query(value="select count(user_id) from user where user.user_id = ?1", nativeQuery = true) 
 	Long countUser(String userId);
 
-	User findByUserName(String username);
+	@Query(value="select * from user where user.user_name = ?1", nativeQuery = true)
+	User findUserName(String username);
 
 }

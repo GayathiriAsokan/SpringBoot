@@ -23,7 +23,7 @@ import javax.persistence.JoinColumn;
  */
 @Entity
 @Table(name="user")
-public class UserDetails {
+public class User {
 
 	@Id
 	@Column(name="user_id")
@@ -49,15 +49,16 @@ public class UserDetails {
 			)
 	private  Set<Role> role;
 
-	public UserDetails() {
+	public User() {
 	}
 
-	public UserDetails(String userId, String designation, int experience, String password) {
+	public User(String userId, String designation, int experience, String password,String username) {
 		super();
 		this.userId = userId;
 		this.designation = designation;
 		this.experience = experience;
 		this.password = password;
+		this.username = username;
 	}
 
 	/**
@@ -85,11 +86,11 @@ public class UserDetails {
 		return experience;
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUserName(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 

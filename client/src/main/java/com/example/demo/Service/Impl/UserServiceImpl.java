@@ -22,7 +22,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Constants.Constants;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
+import com.example.demo.Model.User;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.UserService;
 import com.example.demo.controller.AOP.TrackEntity;
@@ -43,9 +44,9 @@ public class UserServiceImpl implements UserService{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<UserDetails> getAll() {
+	public List<User> getAll() {
 		try {
-			List <UserDetails> user = (List<UserDetails>) userRepository.findAll();
+			List <User> user = (List<User>) userRepository.findAll();
 			return user;
 		} catch (RuntimeException e) {
 			throw e;
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	@TrackEntity
-	public UserDetails insertUser(UserDetails user) {
+	public User insertUser(User user) {
 		try {
 			return userRepository.save(user);
 		} catch (RuntimeException e) {
@@ -71,7 +72,7 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	@TrackEntity
-	public UserDetails updateUser(UserDetails user) {
+	public User updateUser(User user) {
 		try {
 			return userRepository.save(user);
 		} catch (RuntimeException e) {
@@ -98,9 +99,9 @@ public class UserServiceImpl implements UserService{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserDetails getById(String userId) {
+	public User getById(String userId) {
 		try {
-			Optional<UserDetails> user = userRepository.findById(userId);
+			Optional<User> user = userRepository.findById(userId);
 			return user.get();  
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -132,7 +133,7 @@ public class UserServiceImpl implements UserService{
 	 */
 	@TrackEntity
 	@Override
-	public String userRoles(UserDetails user) {
+	public String userRoles(User user) {
 		try {
 			userRepository.save(user);
 			return Constants.INSERT_MESSAGE;

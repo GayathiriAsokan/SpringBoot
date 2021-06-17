@@ -9,7 +9,7 @@ import java.util.Set;
 
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
 
 /**
  * Doing the crud operations using repository
@@ -20,21 +20,21 @@ public interface UserService {
 	 * Get user values 
 	 * @return
 	 */
-	public List<UserDetails> getAll();
+	public List<User> getAll();
 
 	/**
 	 * Inserting the user values
 	 * @param user
 	 * @return
 	 */
-	public UserDetails insertUser(UserDetails user);
+	public User insertUser(User user);
 
 	/**
 	 * Updating the values of user
 	 * @param user
 	 * @return
 	 */
-	public UserDetails updateUser(UserDetails user);
+	public User updateUser(User user);
 
 	/**
 	 * Delete the user by id
@@ -48,7 +48,7 @@ public interface UserService {
 	 * @param userId
 	 * @return
 	 */
-	public UserDetails getById(String userId);
+	public User getById(String userId);
 
 	/**
 	 * Get the count values of user
@@ -62,6 +62,6 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	public String userRoles(UserDetails user);
+	public String userRoles(User user);
 
 }

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Constants.Constants;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
 import com.example.demo.Service.RoleService;
 import com.example.demo.Repository.RoleRepository;
 

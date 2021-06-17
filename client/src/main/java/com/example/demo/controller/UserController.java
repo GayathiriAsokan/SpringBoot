@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.example.demo.Constants.Constants;
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Model.Role;
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
 import com.example.demo.Model.ErrorResponse;
 import com.example.demo.Service.UserService;
 
@@ -57,7 +57,7 @@ public class UserController {
 	 * @return -  used to get all users
 	 */
 	@GetMapping("/getallUsers")
-	public List<UserDetails> getAllUser() {
+	public List<User> getAllUser() {
 		return userService.getAll();
 	}
 
@@ -68,10 +68,7 @@ public class UserController {
 	 * @return - used to saved user
 	 */
 	@PostMapping("/addUser") 
-	private UserDetails createUser(@RequestBody UserDetails user) { 
-//		String pwd = user.getPassword();
-//		String encryptPwd = passwordEncoder.encode(pwd);
-//		user.setPassword(encryptPwd);
+	private User createUser(@RequestBody User user) { 
 		return userService.insertUser(user); 
 	}
 
@@ -82,7 +79,7 @@ public class UserController {
 	 * @return - which is updated
 	 */
 	@PutMapping("/editUser") 
-	private UserDetails editUser(@RequestBody UserDetails user) { 
+	private User editUser(@RequestBody User user) { 
 		return userService.updateUser(user); 
 	}
 
@@ -104,7 +101,7 @@ public class UserController {
 	 * @return - which is retrieve by id
 	 */
 	@GetMapping("getUserById/{userId}")
-	private  UserDetails getUserById(@PathVariable ("userId") int idValue) {
+	private  User getUserById(@PathVariable ("userId") int idValue) {
 		String id = "user_" + idValue;
 		if (userService.count(id) ==  1) {
 			return userService.getById(id);
@@ -121,7 +118,7 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/addUser/userRole") 
-	private String userRole(@RequestBody UserDetails user) {
+	private String userRole(@RequestBody User user) {
 		System.out.println(user);
 		return userService.userRoles(user);
 	}

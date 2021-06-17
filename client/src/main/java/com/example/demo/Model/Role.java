@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
 /**
  * Role is  used to create  a role  for users
  * @author GAYATHIRI
@@ -38,7 +38,7 @@ public class Role {
 	private String roleStatus;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL },mappedBy = "role")
-	private Set<UserDetails> user;
+	private Set<User> user;
 
 
 	/**
@@ -87,11 +87,11 @@ public class Role {
 		this.roleId = roleId;
 	}
 
-	public Set<UserDetails> getUser() {
+	public Set<User> getUser() {
 		return user;
 	}
 
-	public void setUser(Set<UserDetails> user) {
+	public void setUser(Set<User> user) {
 		this.user = user;
 	}
 

@@ -1,12 +1,12 @@
 package com.example.demo.Service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Model.UserDetails;
+import com.example.demo.Model.User;
 import com.example.demo.Model.UserPrincipal;
 import com.example.demo.Repository.UserRepository;
 
@@ -17,10 +17,10 @@ public class MyUserDetailsServiceImpl implements UserDetailsService{
 	UserRepository userRepository;
 
 	@Override
-	public UserPrincipal loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUserName(username);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findUserName(username);
 		if (user == null) {
-			throw new UsernameNotFoundException("USER 404"); } 
+			throw new UsernameNotFoundException("USER 404", null); } 
 		return new	UserPrincipal(user);
 	}
 

@@ -1,6 +1,21 @@
-2021-06-15 21:49:36,101 ERROR RoleController:103 - [] USER ID NOT EXIST
-2021-06-15 23:27:37,798 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
-2021-06-15 23:27:46,564 INFO  StartupInfoLogger:61 - [] Started DemoApplication in 10.684 seconds (JVM running for 11.48)
-2021-06-15 23:29:35,824 INFO  UserServiceAspect:37 - [] Before method:User com.example.demo.Service.Impl.UserServiceImpl.insertUser(User)
-2021-06-15 23:29:35,826 INFO  UserServiceAspect:38 - [] Creating User with userId - User [userId=user_3, designation=sse, experience=2, role=null]
-2021-06-15 23:29:35,835 INFO  UserServiceImpl:67 - [] Method to insert
+2021-06-16 08:10:00,803 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 08:10:55,507 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 08:12:06,052 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 08:12:15,543 INFO  StartupInfoLogger:61 - [] Started DemoApplication in 11.086 seconds (JVM running for 11.921)
+2021-06-16 08:17:35,885 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 08:18:17,000 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 08:18:56,692 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 08:19:08,600 INFO  StartupInfoLogger:61 - [] Started DemoApplication in 13.596 seconds (JVM running for 14.499)
+2021-06-16 12:18:53,373 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 12:20:04,233 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 12:20:13,464 INFO  StartupInfoLogger:61 - [] Started DemoApplication in 10.707 seconds (JVM running for 11.486)
+2021-06-16 13:16:49,212 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 13:18:50,862 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 13:21:24,914 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 13:24:50,248 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 13:30:34,457 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 13:31:01,668 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 13:32:36,073 INFO  SpringApplication:675 - [] No active profile set, falling back to default profiles: default
+2021-06-16 13:32:44,593 INFO  StartupInfoLogger:61 - [] Started DemoApplication in 10.004 seconds (JVM running for 10.719)
+2021-06-16 13:40:43,774 INFO  ServiceAspect:37 - [] Before and After method:User com.example.demo.Service.Impl.UserServiceImpl.insertUser(User)
+2021-06-16 13:40:43,776 INFO  ServiceAspect:38 - [] Creating User with userId - User [userId=user_10, designation=SSE, experience=1, role=null]
