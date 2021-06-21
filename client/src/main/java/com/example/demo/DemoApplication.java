@@ -3,8 +3,6 @@
  */
 package com.example.demo;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * DemoApplication is used for main application 
  * @EnableAspectJAutoProxy annotation enables support for handling the components marked with @Aspect annotation
+ *
  * @author GAYATHIRI
  *
  */
@@ -25,6 +24,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAspectJAutoProxy(proxyTargetClass=true)  
 @EnableSwagger2
 public class DemoApplication {
+	
 	/**
 	 * Main is used to start the spring boot application
 	 * @param args

@@ -52,7 +52,7 @@ public class User {
 	public User() {
 	}
 
-	public User(String userId, String designation, int experience, String password,String username) {
+	public User(String userId, String designation, int experience, String password, String username) {
 		super();
 		this.userId = userId;
 		this.designation = designation;

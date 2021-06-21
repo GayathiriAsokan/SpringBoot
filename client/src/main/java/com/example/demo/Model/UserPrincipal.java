@@ -1,3 +1,6 @@
+/**
+ * Provide necessary to create model class to set user name and password from user class
+ */
 package com.example.demo.Model;
 
 import java.util.Collection;
@@ -9,6 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.Model.User;
 
+/**
+ * It is used to get cut current user  from user details
+ * 
+ * @author GAYATHIRI
+ *
+ */
 public class UserPrincipal implements UserDetails {
 
 	private User user;
@@ -18,6 +27,10 @@ public class UserPrincipal implements UserDetails {
 		super();
 		this.user = user;
 	}
+
+	/**
+	 * Methods are overriden from UserDetails for set username and password from user 
+	 */
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

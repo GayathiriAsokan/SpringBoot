@@ -1,3 +1,6 @@
+/**
+ * Spring Security configuration class WebSecurityConfig 
+ */
 package com.example.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 /**
  * SecurityConfiguration  is used for authentication
+ *  
  * @author GAYATHIRI
- *
  */
 @Configuration
 @EnableWebSecurity
@@ -22,6 +25,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	/**
+	 * TO validate the user and password using AuthenticationProvider
+	 * @return
+	 */
 	@Bean
 	public AuthenticationProvider authProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();

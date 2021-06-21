@@ -7,6 +7,7 @@ package com.example.demo.controller;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -40,16 +41,17 @@ public class RestExceptionHandler {
 		error.setTimeStamp(System.currentTimeMillis());
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR) ;
 	}
+	
 	/**
 	 * It is used to handle the file not exception and send it to response entity
 	 * 
 	 * @param exception
 	 * @return Http response for objects
-	 *
+	 */
 	@ExceptionHandler
-	public ResponseEntity <ErrorResponse> resourceNotFoundException() {
+	public ResponseEntity <ErrorResponse> resourceNotFoundException(ConfigDataResourceNotFoundException exception) {
 		error.setStatus(HttpStatus.NOT_FOUND.value());
-		error.setMessage(exception.getMessage());
+		error.setMessage("File Not Found");
 		error.setTimeStamp(System.currentTimeMillis());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND) ;
 	}
