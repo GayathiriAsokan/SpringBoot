@@ -60,6 +60,8 @@ public class UserServiceImpl implements UserService{
 	@TrackEntity
 	public User insertUser(User user) {
 		try {
+			System.out.println(user);
+			System.out.println(userRepository.save(user));
 			return userRepository.save(user);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -142,4 +144,5 @@ public class UserServiceImpl implements UserService{
 			throw e;
 		}
 	}
+
 }
