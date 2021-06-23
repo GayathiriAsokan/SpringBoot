@@ -54,9 +54,10 @@ public class Role {
 	 * @param roleName
 	 * @param employeeId
 	 */
-	public Role( String roleName, String roleStatus) {
+	public Role(int roleId, String roleName, String roleStatus) {
 		this.roleName = roleName;
 		this.roleStatus = roleStatus;
+		this.roleId = roleId;
 	}
 
 	/**
