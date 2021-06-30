@@ -3,6 +3,8 @@
  */
 package com.example.demo.Service.Impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,7 +24,8 @@ import com.example.demo.Repository.UserRepository;
 @Service
 public class MyUserDetailsServiceImpl implements UserDetailsService{
 
-	@Autowired
+
+	@Autowired 
 	UserRepository userRepository;
 
 	/**
@@ -31,9 +34,9 @@ public class MyUserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findUserName(username);
-		if (user == null) {
-			throw new UsernameNotFoundException("USER 404", null); } 
-		return new	UserPrincipal(user);
+		if (user == null) { 
+			throw new UsernameNotFoundException("USER 404", null); }
+		return new UserPrincipal(user);
 	}
 
 }

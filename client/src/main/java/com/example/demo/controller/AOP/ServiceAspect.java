@@ -1,5 +1,5 @@
 /**
- * Provide necessay to create AOP with service 
+ * Provide necessary to create AOP with service 
  * 
  */
 package com.example.demo.controller.AOP;
@@ -16,7 +16,7 @@ import com.example.demo.Model.Role;
 import com.example.demo.Model.User;
 
 /**
- * Adding some additional behaviour in existing code without modify the code itself
+ * Adding some additional behavior in existing code without modify the code itself
  * 
  * @author GAYATHIRI
  *
