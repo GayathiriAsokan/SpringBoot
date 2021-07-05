@@ -32,21 +32,35 @@ import com.example.demo.security.filters.JwtRequestFilter;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
+	private static final String[] AUTH_IGNORE = {
+			"/health",
+			"/swagger-ui.html",
+	};
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
-	
-    /**
-     * Configure AuthenticationManager to know from where to load
+
+	/**
+	 * List of URLS that Spring Security will ignore, i.e, not authorize
+	 */
+	@Override
+	public void configure(WebSecurity web) {
+		web.ignoring()
+		.antMatchers(AUTH_IGNORE);
+	}
+
+	/**
+	 * Configure AuthenticationManager to know from where to load
 	 * Check user for matching credentials
-     */
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
 	}
-	
+
 	/**
 	 * Attempts to authenticate the passed Authentication object
 	 */
@@ -55,7 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
+
 	/**
 	 * Add a filter to validate the tokens with every request
 	 * To Authenticate all request except authenticate
@@ -63,11 +77,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable()
-				.authorizeRequests().antMatchers("/authenticate").permitAll().
-						anyRequest().authenticated().and().
-						exceptionHandling().and().sessionManagement()
-						//session won't be used to store user's state.
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.authorizeRequests().antMatchers("/authenticate").permitAll().
+		anyRequest().authenticated().and().
+		exceptionHandling().and().sessionManagement()
+		//session won't be used to store user's state.
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
