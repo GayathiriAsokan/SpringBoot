@@ -77,7 +77,6 @@ class DemoApplicationTests {
 		assertEquals(2, userService.getAll().size());
 	}
 	
-
 	/**
 	 * To test the return values by deleteById method from user service 
 	 * To check equality of two objects
@@ -89,7 +88,6 @@ class DemoApplicationTests {
 		userService.deleteUser(user.getUserId());
 		verify(repository).deleteById(user.getUserId());
 	}
-
 
 	/**
 	 * To test the return values by getById method from user service 
