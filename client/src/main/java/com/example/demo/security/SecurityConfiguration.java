@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	private JwtRequestFilter jwtRequestFilter;
 
 	/**
-	 * List of URLS that Spring Security will ignore, i.e, not authorize
+	 * Spring Security is to ignore, i.e, not authorize
 	 */
 	@Override
 	public void configure(WebSecurity web) {
@@ -62,7 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	}
 
 	/**
-	 * Attempts to authenticate the passed Authentication object
+	 * Process an authentication request
 	 */
 	@Override
 	@Bean
