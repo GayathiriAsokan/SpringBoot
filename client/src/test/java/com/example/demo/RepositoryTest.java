@@ -33,7 +33,7 @@ public class RepositoryTest {
 	
 	@Test 
 	public void insertUserTest() { 
-		User user = new User("user_11","se",1,"pwd11"," user11");
+		User user = new User("user_2","se",1,"pwd2"," user2");
 		when(repository.save(user)).thenReturn(user);
 		assertEquals(user,userRepository.save(user)); 
 	}
@@ -45,7 +45,7 @@ public class RepositoryTest {
 	@Test 
 	public void getAllUserTest() { 
 		when(repository.findAll()).thenReturn(Stream
-				.of(new User("user_9","se",1,"pwd9"," user9"),new User("user_10","se",1,"pwd10"," user10")).collect(Collectors.toList()));
+				.of(new User("user_1","se",1,"pwd1"," user1"),new User("user_2","se",1,"pwd2"," user2")).collect(Collectors.toList()));
 		assertEquals(2, userRepository.findAll().size());
 	}
 	
@@ -55,7 +55,7 @@ public class RepositoryTest {
 	 */
 	@Test
 	public void deleteUserTest() {
-		User user = new User("user_9","se",1,"pwd9"," user9");
+		User user = new User("user_2","se",1,"pwd2"," user2");
 		when(repository.findById(user.getUserId())).thenReturn(Optional.of(user));
 		userRepository.deleteById(user.getUserId());
 		verify(repository).deleteById(user.getUserId());
@@ -64,11 +64,11 @@ public class RepositoryTest {
 	/**
 	 * To test the return values by getById method from user service 
 	 * To check equality of two objects
-	
+	 */
 	@Test
 	public void  getUserById() {
-		User user = new User("user_9","se",1,"pwd9"," user9");
+		User user = new User("user_2","se",1,"pwd2"," user2");
 		when(repository.findById(user.getUserId())).thenReturn(Optional.of(user));
 		assertEquals(user, userRepository.findById(user.getUserId()));
-	} */
+	} 
 }
